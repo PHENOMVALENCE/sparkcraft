@@ -6,641 +6,68 @@
     <title>SparkCraft | Ignite. Innovate. Impact.</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-light: #f5f5f5;
-            --bg-card: #1a1a1a;
-            --accent-yellow: #FFD700;
-            --accent-orange: #FF8C00;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-dark: #1a1a1a;
-            --border: #333;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            padding: 1.2rem 0;
-        }
-
-        .navbar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent-yellow);
-        }
-
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-yellow);
-            transition: width 0.3s ease;
-        }
-
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-
-        .btn-nav {
-            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-            color: var(--text-dark);
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            padding: 120px 0;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 140, 0, 0.05));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(50px); }
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .sub-lead {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .hero .description {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-            color: var(--text-dark);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent-yellow);
-            border: 2px solid var(--accent-yellow);
-            padding: 0.95rem 2.4rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-yellow);
-            color: var(--text-dark);
-            transform: translateY(-3px);
-        }
-
-        .hero-visual {
-            position: relative;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .visual-card {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.05));
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .visual-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .activity-badge {
-            font-size: 3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ===== ABOUT SECTION ===== */
-        .about-section {
-            padding: 100px 0;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-content h2 {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-yellow);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .about-content h3 {
-            font-size: 3rem;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            font-weight: 800;
-        }
-
-        .about-content p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-box {
-            padding: 2rem;
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
-
-        .stat-box:hover {
-            border-color: var(--accent-yellow);
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent-yellow);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* ===== SERVICES SECTION ===== */
-        .services-section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-yellow);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .section-heading {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 4rem;
-            font-weight: 800;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            border-radius: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-orange));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            border-color: var(--accent-yellow);
-            background: rgba(255, 215, 0, 0.05);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.15);
-        }
-
-        .service-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: rgba(255, 215, 0, 0.2);
-            margin-bottom: 1rem;
-        }
-
-        .service-card h4 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .service-card p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        .contact-section {
-            padding: 100px 0;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-        }
-
-        .contact-content {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .contact-content h2 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 2rem;
-            font-weight: 800;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .contact-box {
-            background: rgba(255, 215, 0, 0.05);
-            border: 1px solid var(--border);
-            padding: 2.5rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .contact-box:hover {
-            border-color: var(--accent-yellow);
-            background: rgba(255, 215, 0, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .contact-box i {
-            font-size: 2.5rem;
-            color: var(--accent-yellow);
-            margin-bottom: 1rem;
-        }
-
-        .contact-box strong {
-            display: block;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-box p {
-            font-size: 1.2rem;
-            color: var(--text-primary);
-        }
-
-        .contact-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            grid-column: span 1;
-            padding: 1rem;
-            background: var(--border);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .contact-form textarea {
-            grid-column: span 2;
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--accent-yellow);
-            background: rgba(255, 215, 0, 0.05);
-            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-        }
-
-        .contact-form button {
-            grid-column: span 2;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #000;
-            border-top: 1px solid var(--border);
-            padding: 3rem 0;
-            text-align: center;
-            color: var(--text-secondary);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .about-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form textarea,
-            .contact-form button {
-                grid-column: span 1;
-            }
-
-            .hero-visual {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                gap: 1rem;
-            }
-
-            .nav-menu a {
-                font-size: 0.9rem;
-            }
-
-            .hero {
-                padding: 80px 0;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-heading {
-                font-size: 2.5rem;
-            }
-
-            .about-content h3 {
-                font-size: 2.2rem;
-            }
-
-            .contact-content h2 {
-                font-size: 2.5rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <div class="logo">SPARKCRAFT</div>
             <div class="nav-menu">
-                <a href="#about">Why Us</a>
+                <a href="#about">About</a>
                 <a href="#services">Services</a>
-                <a href="#contact">Process</a>
+                <a href="#process">Process</a>
+                <a href="#impact">Impact</a>
                 <a href="#contact" class="btn-nav">⚡ Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div>
-                    <h1>IGNITE.<br>INNOVATE.<br>IMPACT.</h1>
-                    <p class="sub-lead">Strategy Powered by Insight, Technology Fueled by Purpose.</p>
-                    <p class="description">We help African enterprises build forward-thinking digital solutions and unlock sustainable growth through strategic innovation.</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn-primary">Start Your Journey</a>
-                        <a href="#services" class="btn-secondary">Explore Services</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="visual-card">
-                        <div class="activity-badge">+145%<br>GROWTH</div>
-                    </div>
+  <section class="hero">
+    <div class="container">
+        <div class="hero-content">
+
+            <!-- HERO TEXT -->
+            <div class="hero-text">
+                <h1>
+                    IGNITE.<br>
+                    INNOVATE.<br>
+                    <span class="text-gradient">IMPACT.</span>
+                </h1>
+
+                <p class="sub-lead">
+                    Strategy Powered by Insight, Technology Fueled by Purpose.
+                </p>
+
+                <p class="description">
+                    We help African enterprises build forward-thinking digital solutions,
+                    scale with data-driven strategies, and unlock sustainable growth in
+                    competitive markets.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Start Your Journey</a>
+                    <a href="#services" class="btn-secondary">Explore Services</a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ABOUT -->
+           
+
+        </div>
+    </div>
+</section>
+
+
     <section id="about" class="about-section">
         <div class="container">
             <div class="about-grid">
                 <div>
                     <h2>Why SparkCraft Exists</h2>
                     <h3>We engineer brands for growth.</h3>
-                    <p>At SparkCraft, we believe great brands are built at the intersection of strategy, creativity, and execution. We partner with ambitious founders to translate bold ideas into compelling brand experiences that drive measurable results.</p>
-                    <p>Our approach combines deep market insights with cutting-edge technology to create digital solutions that don't just look good—they perform.</p>
+                    <p>At SparkCraft, we believe technology is a force multiplier for African business success. We partner with ambitious founders, high-growth startups, and enterprise leaders who want more than tools — they want transformation.</p>
+                    <p>From ideation to execution, we craft bespoke digital products, strategic growth frameworks, and measurable market impact that elevates brands and accelerates performance.</p>
+                    <p>Great brands aren't decorated—they're engineered for growth at the intersection of strategy, creativity, and flawless execution.</p>
                 </div>
                 <div>
                     <div class="stats-grid">
@@ -657,7 +84,7 @@
                             <div class="stat-label">Years Experience</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number">4</div>
+                            <div class="stat-number">5</div>
                             <div class="stat-label">Core Services</div>
                         </div>
                     </div>
@@ -666,42 +93,173 @@
         </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="services-section">
+    <section id="process" class="process-section">
         <div class="container">
-            <h2 class="section-title">Our Expertise</h2>
-            <h2 class="section-heading">Transformative Services for Ambitious Brands</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-number">01</div>
-                    <h4>Strategic Advisory</h4>
-                    <p>Market entry strategy, business model refinement, and performance analytics to position your brand for success in competitive markets.</p>
+            <div class="process-header">
+                <h2 class="section-title">How We Deliver Results</h2>
+                <h2 class="section-heading">Our Strategic Approach</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4>Discover</h4>
+                    <p>Deep business audit—understanding goals, target audience, and competitive landscape for strategic clarity.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-number">02</div>
-                    <h4>Digital Product Development</h4>
-                    <p>SaaS platforms, mobile apps, and enterprise solutions built for user adoption with scalability and performance at the core.</p>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4>Design</h4>
+                    <p>Architecture of product experiences and go-to-market frameworks aligned with vision and customer expectations.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-number">03</div>
-                    <h4>Brand & Experience Design</h4>
-                    <p>Brand identity and UX/UI design that resonates across every touchpoint, creating memorable experiences that drive engagement.</p>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4>Develop</h4>
+                    <p>Building to scale with clean code, scalable architectures, and intuitive interfaces that exceed user needs.</p>
                 </div>
-                <div class="service-card">
-                    <div class="service-number">04</div>
-                    <h4>Growth Hacking</h4>
-                    <p>Tailored funnels optimized for acquisition, retention, and monetization using data-driven strategies and creative experimentation.</p>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4>Deploy</h4>
+                    <p>Precision deployment from soft launches to full rollout, ensuring performance, reliability, and adoption.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">05</div>
+                    <h4>Optimize</h4>
+                    <p>Iterative growth—monitoring performance, refining tactics, and evolving strategy for ongoing value.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="process-header">
+                <h2 class="section-title">Our Expertise</h2>
+                <h2 class="section-heading">Comprehensive Digital Solutions</h2>
+            </div>
+            <div class="services-intro">
+                <p>We combine deep understanding of African market dynamics with best-in-class methodologies used by leading tech consultancies worldwide.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-number">01</div>
+                    <h4>Strategic Advisory & Business Growth</h4>
+                    <p>We go beyond traditional consulting — architecting holistic growth pathways that help you validate product-market fit, optimize go-to-market strategies, and unlock revenue expansion.</p>
+                    <div class="focus-areas">📌 Market entry • Business model refinement • Performance analytics</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">02</div>
+                    <h4>Digital Product Development</h4>
+                    <p>Designing not just software, but solutions that solve real customer challenges and drive user adoption at scale.</p>
+                    <div class="focus-areas">📌 SaaS platforms • Mobile apps • Enterprise solutions • API integrations</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">03</div>
+                    <h4>Brand & Experience Design</h4>
+                    <p>Your brand is your story — we design experiences that resonate, engage, and convert across every touchpoint and channel.</p>
+                    <div class="focus-areas">📌 Brand identity • UX/UI design • Customer journey mapping</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">04</div>
+                    <h4>Digital Marketing & Growth Hacking</h4>
+                    <p>Harness the power of data to reach audiences that matter. We develop tailored funnels optimized for acquisition, retention, and monetization.</p>
+                    <div class="focus-areas">📌 SEO • Performance marketing • Content strategy • Analytics</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">05</div>
+                    <h4>Outsourced Tech & Product Teams</h4>
+                    <p>Extend your capabilities with dedicated SparkCraft teams that plug into your organization and deliver excellence from sprint to launch.</p>
+                    <div class="focus-areas">📌 Dedicated developers • Product managers • QA engineers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="impact" class="impact-section">
+        <div class="container">
+            <div class="process-header">
+                <h2 class="section-title">Selected Impact Stories</h2>
+                <h2 class="section-heading">Transforming African Enterprises</h2>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-title">Transforming FinTech Adoption</div>
+                    <div class="impact-metric">+40%</div>
+                    <p class="impact-description">We supported a digital payments startup to refine its onboarding journey and user segmentation strategy, achieving a 40% increase in monthly active users (MAU) within six months.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-title">Scaling SME Platforms</div>
+                    <div class="impact-metric">3x</div>
+                    <p class="impact-description">For a logistics SaaS provider, we redesigned the platform architecture and marketing funnels — resulting in a 3x growth in annual recurring revenue (ARR) year-over-year.</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-title">Brand Reinvention for Growth</div>
+                    <div class="impact-metric">↑ Enterprise</div>
+                    <p class="impact-description">A legacy enterprise partnered with SparkCraft to reposition its brand, driving increased engagement, market relevance, and new enterprise contracts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-section">
+        <div class="container">
+            <div class="process-header">
+                <h2 class="section-title">Why Partners Choose Us</h2>
+                <h2 class="section-heading">What Sets Us Apart</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <h3>🌍 Local Insight. Global Standards</h3>
+                    <p>We combine deep understanding of African market dynamics with best-in-class methodologies used by leading tech consultancies worldwide. You get both market expertise and enterprise-grade execution.</p>
+                </div>
+                <div class="why-card">
+                    <h3>🎯 End-to-End Partnership</h3>
+                    <p>Whether you're at concept or scaling-stage, we guide you at every phase—from strategic planning to execution and performance refinement. Your success is our success.</p>
+                </div>
+                <div class="why-card">
+                    <h3>📊 Data-Driven, Outcome-Focused</h3>
+                    <p>Our frameworks emphasize measurable outcomes, transparent dashboards, and decisions supported by real metrics. No vanity metrics—just pure results.</p>
+                </div>
+                <div class="why-card">
+                    <h3>💡 Innovation with Purpose</h3>
+                    <p>We craft solutions that are not only technologically advanced but ethically grounded and strategically viable for long-term sustainability and positive impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="process-header">
+                <h2 class="section-title">What Clients Say</h2>
+                <h2 class="section-heading">Trusted by African Leaders</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"SparkCraft didn't just build our app—they transformed how we approach growth. From strategy to execution, they're partners who get the African market."</p>
+                    <div class="testimonial-author">Amara Okonkwo</div>
+                    <div class="testimonial-role">Founder, FinTech Startup</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Scaling our SaaS platform seemed impossible until we worked with SparkCraft. Their architecture decisions alone saved us 6 months of development time."</p>
+                    <div class="testimonial-author">David Kipchoge</div>
+                    <div class="testimonial-role">CEO, Logistics Platform</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Beyond the technical excellence, what impressed us most was their strategic thinking. They became an extension of our team, not just vendors."</p>
+                    <div class="testimonial-author">Zainab Hassan</div>
+                    <div class="testimonial-role">Head of Innovation, Enterprise Corp</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="contact-content">
                 <h2>Ready to Build What's Next?</h2>
-                <p style="color: var(--text-secondary); font-size: 1.1rem;">Let's ignite your brand's potential. Get in touch today.</p>
+                <p>Your next breakthrough starts with clarity, cadence, and contribution. Let's ignite ideas, innovate solutions, and drive lasting impact.</p>
             </div>
 
             <div class="contact-grid">
@@ -718,7 +276,7 @@
                 <div class="contact-box">
                     <i class="fas fa-map-marker-alt"></i>
                     <strong>Location</strong>
-                    <p>Dar es Salaam, TZ</p>
+                    <p>Dar es Salaam & Remote Global</p>
                 </div>
             </div>
 
@@ -731,12 +289,12 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 SparkCraft Studio. All rights reserved. | Strategy • Design • Technology</p>
+            <p>&copy; 2025 SparkCraft Studio. All rights reserved. | Strategy • Design • Technology • Impact</p>
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
