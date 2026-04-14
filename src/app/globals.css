@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --spark-primary: #1a3c2e;
+  --spark-accent: #c9982a;
+  --spark-bg: #f8f6f1;
+  --spark-dark: #0d1f17;
+  --spark-text: #1c1c1c;
+}
+
+html,
+body {
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-inter), sans-serif;
+  background-color: var(--spark-bg);
+  color: var(--spark-text);
+}
+
+.container-wide {
+  @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+}
+
+.section-label {
+  @apply text-xs font-semibold uppercase tracking-[0.24em] text-spark-accent;
+}
+
+.grain-overlay {
+  background-image:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.03) 0,
+      rgba(255, 255, 255, 0.03) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+}
+
+.ticker-track {
+  animation: ticker 38s linear infinite;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation-duration: 0.001ms;
+    animation-iteration-count: 1;
+  }
+}
