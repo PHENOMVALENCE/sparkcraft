@@ -3,41 +3,59 @@
 import { motion } from "framer-motion";
 import { industries } from "@/lib/data";
 
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1 },
+};
+
 export default function Industries() {
   return (
-    <motion.section
-      id="sectors"
-      className="py-24 md:py-32"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
-    >
+    <section id="sectors" className="py-24 md:py-32">
       <div className="container-wide">
-        <p className="section-label">SECTORS</p>
-        <h2 className="mt-4 text-4xl font-black tracking-tight text-spark-primary md:text-5xl">
-          Industries We Cover
-        </h2>
-        <p className="mt-5 max-w-4xl text-zinc-700 md:text-lg">
-          From subsurface to supply chain, Sparkcraft operates across the sectors that define
-          Africa&apos;s economic development trajectory.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+        >
+          <p className="section-label">SECTORS</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-spark-primary md:text-5xl">
+            Industries We Cover
+          </h2>
+          <p className="mt-5 max-w-4xl text-zinc-700 md:text-lg">
+            From subsurface to supply chain, Sparkcraft operates across the sectors that define
+            Africa&apos;s economic development trajectory.
+          </p>
+        </motion.div>
 
-        <div className="mt-12 flex flex-wrap gap-3">
+        <motion.div
+          className="mt-12 flex flex-wrap gap-3"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {industries.map((item) => (
             <motion.span
               key={item}
-              className="rounded-full bg-spark-primary px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-spark-accent hover:text-spark-dark md:text-base"
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45 }}
+              variants={itemVariants}
+              transition={{ duration: 0.4 }}
+              className="cursor-default rounded-full border border-spark-primary bg-spark-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-spark-accent hover:bg-spark-accent hover:text-spark-dark hover:shadow-md md:text-base"
             >
               {item}
             </motion.span>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </motion.section>
+    </section>
   );
 }

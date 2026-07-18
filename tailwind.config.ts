@@ -16,6 +16,12 @@ const config: Config = {
           dark: "#0D1F17",
           text: "#1C1C1C",
         },
+        sg: {
+          DEFAULT: "#1E6B3C",
+          dark: "#14522C",
+          lime: "#8BC34A",
+          soft: "#F3F8F4",
+        },
       },
       letterSpacing: {
         tightest: "-0.04em",

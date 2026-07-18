@@ -15,13 +15,36 @@ body {
   width: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
 body {
   font-family: var(--font-inter), sans-serif;
   background-color: var(--spark-bg);
   color: var(--spark-text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.container-wide {
+::selection {
+  background-color: var(--spark-accent);
+  color: var(--spark-dark);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--spark-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}.container-wide {
   @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
 }
 

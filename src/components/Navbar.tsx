@@ -15,9 +15,18 @@ export default function Navbar() {
     setScrolled(latest > 24);
   });
 
+  // Over the dark hero the nav must be light; once scrolled it sits on the cream shell.
+  const onDark = !scrolled && !isOpen;
+
   const shell = scrolled
-    ? "border-b border-[#d7d0be] bg-[#f8f6f1]/95 shadow-sm backdrop-blur"
-    : "border-b border-transparent bg-transparent";
+    ? "border-b border-[#d7d0be] bg-spark-bg/95 shadow-sm backdrop-blur"
+    : isOpen
+      ? "border-b border-transparent bg-spark-bg"
+      : "border-b border-transparent bg-transparent";
+
+  const linkColor = onDark
+    ? "text-white/90 hover:text-spark-accent"
+    : "text-spark-primary hover:text-spark-accent";
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
@@ -29,7 +38,11 @@ export default function Navbar() {
         <div className="container-wide">
           <div className="flex h-20 items-center justify-between">
             <Link href="/" className="leading-none">
-              <span className="block text-xl font-black tracking-tightest text-spark-primary md:text-2xl">
+              <span
+                className={`block text-xl font-black tracking-tightest transition-colors duration-300 md:text-2xl ${
+                  onDark ? "text-white" : "text-spark-primary"
+                }`}
+              >
                 SPARKCRAFT
               </span>
               <span className="block text-[10px] font-semibold uppercase tracking-wider2 text-spark-accent md:text-xs">
@@ -42,14 +55,15 @@ export default function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-spark-primary transition-colors hover:text-spark-accent"
+                  className={`group relative text-sm font-medium transition-colors duration-300 ${linkColor}`}
                 >
                   {item.label}
+                  <span className="absolute -bottom-1.5 left-0 h-0.5 w-0 bg-spark-accent transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
               <a
-                href="#contact"
-                className="rounded-full bg-spark-accent px-5 py-3 text-sm font-semibold text-spark-dark transition-transform hover:-translate-y-0.5"
+                href="/#contact"
+                className="rounded-full bg-spark-accent px-5 py-3 text-sm font-semibold text-spark-dark shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
                 Start Your Engagement
               </a>
@@ -58,8 +72,13 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setIsOpen((prev) => !prev)}
-              className="rounded-full border border-spark-primary/20 p-2 text-spark-primary md:hidden"
+              className={`rounded-full border p-2 transition-colors duration-300 md:hidden ${
+                onDark
+                  ? "border-white/30 text-white"
+                  : "border-spark-primary/20 text-spark-primary"
+              }`}
               aria-label="Toggle menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -73,23 +92,23 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.25 }}
-              className="border-t border-[#d7d0be] bg-[#f8f6f1] md:hidden"
+              className="border-t border-[#d7d0be] bg-spark-bg shadow-lg md:hidden"
             >
               <div className="container-wide py-4">
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col">
                   {navLinks.map((item) => (
                     <a
                       key={item.href}
                       href={item.href}
-                      className="text-base font-medium text-spark-primary"
+                      className="border-b border-spark-primary/10 py-4 text-base font-medium text-spark-primary transition-colors hover:text-spark-accent"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}
                     </a>
                   ))}
                   <a
-                    href="#contact"
-                    className="mt-2 inline-flex w-fit rounded-full bg-spark-accent px-5 py-3 text-sm font-semibold text-spark-dark"
+                    href="/#contact"
+                    className="mt-4 inline-flex w-fit rounded-full bg-spark-accent px-5 py-3 text-sm font-semibold text-spark-dark"
                     onClick={() => setIsOpen(false)}
                   >
                     Start Your Engagement

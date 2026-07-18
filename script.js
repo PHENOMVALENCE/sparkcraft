@@ -1,70 +1,75 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Handle Contact Form Submission
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Basic UI Feedback
-            const submitBtn = contactForm.querySelector('button');
-            const originalText = submitBtn.innerText;
-            
-            submitBtn.innerText = "Sending...";
-            submitBtn.disabled = true;
 
-            // Simulate API Call
-            setTimeout(() => {
-                alert('Thank you for reaching out! We will get back to you soon.');
-                contactForm.reset();
-                submitBtn.innerText = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
-        });
+    const navbar = document.getElementById('navbar');
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    // --- Ticker: duplicate content once for a seamless -50% loop ---
+    const tickerTrack = document.getElementById('tickerTrack');
+    if (tickerTrack) {
+        tickerTrack.innerHTML += tickerTrack.innerHTML;
     }
 
-    // 2. Simple Scroll Animation for Service Cards
-    const observerOptions = {
-        threshold: 0.1
+    // --- Mobile navigation ---
+    const closeMenu = () => {
+        navMenu.classList.remove('open');
+        navToggle.classList.remove('open');
+        navbar.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    navToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('open');
+        navToggle.classList.toggle('open', isOpen);
+        navbar.classList.toggle('menu-open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
+
+    // --- Navbar state on scroll ---
+    const onScroll = () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // --- Reveal-on-scroll animations ---
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.service-card, .impact-card').forEach(card => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(20px)";
-        card.style.transition = "all 0.6s ease-out";
-        observer.observe(card);
-    });
-});
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-window.addEventListener('scroll', function() {
-    const nav = document.querySelector('.navbar');
-    // Shrinks the navbar and adds a blur effect after 50px of scrolling
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-});
+    // --- FAQ accordion (Sparkgreen page) ---
+    const faqItems = document.querySelectorAll('.sg-faq');
 
-// Smooth scroll logic for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 70, // Offset for the sticky nav
-                behavior: 'smooth'
-            });
-        }
+    const setFaqState = (item, open) => {
+        const btn = item.querySelector('.sg-faq-btn');
+        const answer = item.querySelector('.sg-faq-answer');
+        item.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        answer.style.maxHeight = open ? answer.scrollHeight + 'px' : '0';
+    };
+
+    faqItems.forEach(item => {
+        setFaqState(item, item.classList.contains('open'));
+
+        item.querySelector('.sg-faq-btn').addEventListener('click', () => {
+            const willOpen = !item.classList.contains('open');
+            faqItems.forEach(other => setFaqState(other, false));
+            setFaqState(item, willOpen);
+        });
     });
 });

@@ -1,9 +1,10 @@
 export const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Who We Serve", href: "#who-we-serve" },
-  { label: "Sectors", href: "#sectors" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Expertise", href: "/#expertise" },
+  { label: "Who We Serve", href: "/#who-we-serve" },
+  { label: "Sectors", href: "/#sectors" },
+  { label: "Sparkgreen", href: "/sparkgreen" },
+  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const tickerItems = [
