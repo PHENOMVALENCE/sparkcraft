@@ -17,7 +17,7 @@ export default function WhoWeServe() {
   return (
     <section
       id="who-we-serve"
-      className="relative overflow-hidden bg-spark-primary py-24 text-white md:py-32"
+      className="relative overflow-hidden bg-spark-dark py-24 text-white md:py-32"
     >
       <div
         className="pointer-events-none absolute -right-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-spark-accent/10 blur-3xl"
@@ -52,7 +52,7 @@ export default function WhoWeServe() {
                 <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-spark-accent/15 text-spark-accent">
                   <Icon size={20} aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-bold">{item.title}</h3>
+                <h3 className="text-xl font-bold text-spark-accent">{item.title}</h3>
                 <p className="mt-4 text-sm leading-7 text-zinc-200 md:text-base">
                   {item.description}
                 </p>

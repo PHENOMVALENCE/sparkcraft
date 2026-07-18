@@ -75,7 +75,7 @@ export default function Services() {
                   <Icon size={22} aria-hidden="true" />
                 </div>
 
-                <h3 className="relative text-2xl font-bold text-white">{service.name}</h3>
+                <h3 className="relative text-2xl font-bold text-spark-accent">{service.name}</h3>
                 <p className="relative mt-4 flex-1 leading-7 text-zinc-300">
                   {service.description}
                 </p>
