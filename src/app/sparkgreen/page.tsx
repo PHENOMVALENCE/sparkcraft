@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 import SparkgreenContent from "@/components/sparkgreen/SparkgreenContent";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Sparkgreen by Sparkcraft | Creative Carbon Solutions for Organizations in Tanzania",
+export const metadata: Metadata = createPageMetadata({
+  title: "Sparkgreen by Sparkcraft | Creative Carbon Solutions for Tanzania",
   description:
-    "Sparkgreen, Sparkcraft's sustainability arm, helps companies, organizations and governments measure, reduce, offset and digitally report their carbon footprint — beyond tree planting.",
-  openGraph: {
-    title: "Sparkgreen by Sparkcraft",
-    description: "Your carbon footprint, measured, reduced and reported — creatively.",
-    url: "https://sparkcraft.co.tz/sparkgreen",
-    siteName: "Sparkcraft Consulting",
-    locale: "en_US",
-    type: "website",
-  },
-};
+    "Sparkgreen helps companies and organizations in Tanzania measure, reduce, offset and digitally report their carbon footprint — beyond tree planting, with verified impact.",
+  path: "/sparkgreen",
+  ogTitle: "Sparkgreen by Sparkcraft | Sustainability Reimagined for Tanzania",
+  ogDescription:
+    "Creative carbon solutions — measure, reduce, offset and report your footprint with digital verification built for Tanzania.",
+});
 
 export default function SparkgreenPage() {
   return <SparkgreenContent />;
