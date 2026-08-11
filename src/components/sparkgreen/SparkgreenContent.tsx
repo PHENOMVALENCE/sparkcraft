@@ -248,9 +248,9 @@ export default function SparkgreenContent() {
   return (
     <main id="main-content" className="overflow-x-hidden bg-sg-soft">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-sg-dark pt-28 pb-16 text-white md:pt-32 md:pb-20">
+      <section className="hero-viewport relative overflow-hidden bg-sg-dark text-white">
         <div className="grain-overlay absolute inset-0" aria-hidden="true" />
-        <div className="container-wide relative z-10">
+        <div className="container-wide relative z-10 pb-8 pt-[var(--nav-offset)] md:pb-12">
           <motion.div
             initial="hidden"
             animate="show"

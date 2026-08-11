@@ -14,6 +14,7 @@
   --spark-text: #1c1c1c;
   --spark-muted: #5c5c5c;
   --spark-border: #e5e0d4;
+  --nav-offset: clamp(5rem, 8vh, 6.5rem);
 }
 
 html,
@@ -23,7 +24,7 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: calc(var(--nav-offset) + 1rem);
 }
 
 body {
@@ -128,6 +129,22 @@ button:focus-visible {
 
   .ticker-track {
     animation: ticker 38s linear infinite;
+  }
+
+  .hero-viewport {
+    min-height: 100svh;
+    min-height: 100dvh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.875rem, 4.2vw, 3.75rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-map {
+    max-height: min(38vh, 360px);
   }
 }
 

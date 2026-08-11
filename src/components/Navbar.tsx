@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { navLinks } from "@/lib/data";
 import Button from "@/components/ui/Button";
@@ -13,17 +14,23 @@ const sectionIds = navLinks
   .filter(Boolean);
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { scrollY } = useScroll();
 
+  const onHomeOrSparkgreen = pathname === "/" || pathname === "/sparkgreen";
+  const onDarkHero = onHomeOrSparkgreen && !scrolled && !isOpen;
+
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 24);
+    setScrolled(latest > 16);
   });
 
   const updateActiveSection = useCallback(() => {
-    const offset = 120;
+    if (pathname !== "/") return;
+
+    const offset = 140;
     let current = "";
 
     for (const id of sectionIds) {
@@ -34,7 +41,7 @@ export default function Navbar() {
     }
 
     setActiveSection(current);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     updateActiveSection();
@@ -42,87 +49,99 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", updateActiveSection);
   }, [updateActiveSection]);
 
-  const onDark = !scrolled && !isOpen;
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
       <motion.nav
         className={cn(
-          "transition-all duration-300",
-          scrolled
-            ? "border-b border-spark-border bg-spark-bg/95 shadow-sm backdrop-blur-md"
-            : isOpen
-              ? "border-b border-spark-border bg-spark-bg"
-              : "border-b border-transparent bg-transparent",
+          "pointer-events-auto mx-auto max-w-6xl overflow-hidden rounded-2xl border transition-all duration-300",
+          onDarkHero
+            ? "border-white/10 bg-spark-dark/80 shadow-lg shadow-black/25 backdrop-blur-md"
+            : "border-spark-border/70 bg-spark-bg/92 shadow-md backdrop-blur-md",
+          scrolled && "shadow-lg",
         )}
         initial={false}
       >
-        <div className="container-wide">
-          <div
-            className={cn(
-              "flex items-center justify-between transition-all duration-300",
-              scrolled ? "h-16" : "h-20",
-            )}
-          >
-            <Link href="/" className="leading-none" aria-label="Sparkcraft Consulting home">
-              <span
-                className={cn(
-                  "block text-xl font-black tracking-tightest transition-colors duration-300 md:text-2xl",
-                  onDark ? "text-white" : "text-spark-primary",
-                )}
-              >
-                SPARKCRAFT
-              </span>
-              <span className="block text-[10px] font-semibold uppercase tracking-wider2 text-spark-accent md:text-xs">
-                CONSULTING
-              </span>
-            </Link>
-
-            <div className="hidden items-center gap-7 lg:flex">
-              {navLinks.map((item) => {
-                const sectionId = item.href.replace("/#", "").replace("#", "");
-                const isActive = activeSection === sectionId;
-                return (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    aria-current={isActive ? "true" : undefined}
-                    className={cn(
-                      "group relative text-sm font-medium transition-colors duration-200",
-                      onDark ? "text-white/90 hover:text-spark-accent" : "text-spark-primary hover:text-spark-accent",
-                      isActive && "text-spark-accent",
-                    )}
-                  >
-                    {item.label}
-                    <span
-                      className={cn(
-                        "absolute -bottom-1.5 left-0 h-0.5 bg-spark-accent transition-all duration-200",
-                        isActive ? "w-full" : "w-0 group-hover:w-full",
-                      )}
-                    />
-                  </a>
-                );
-              })}
-              <Button href="/#contact" variant="primary" className="px-5 py-2.5">
-                Start Your Engagement
-              </Button>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setIsOpen((prev) => !prev)}
+        <div className="flex h-[3.625rem] items-center justify-between px-4 sm:px-5 lg:h-[3.875rem] lg:px-6">
+          <Link href="/" className="leading-none" aria-label="Sparkcraft Consulting home">
+            <span
               className={cn(
-                "rounded-full border p-2 transition-colors duration-200 lg:hidden",
-                onDark
-                  ? "border-white/30 text-white"
-                  : "border-spark-primary/20 text-spark-primary",
+                "block text-lg font-black tracking-tightest transition-colors duration-300 sm:text-xl",
+                onDarkHero ? "text-white" : "text-spark-primary",
               )}
-              aria-label={isOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+              SPARKCRAFT
+            </span>
+            <span className="block text-[9px] font-semibold uppercase tracking-wider2 text-spark-accent sm:text-[10px]">
+              CONSULTING
+            </span>
+          </Link>
+
+          <div className="hidden items-center gap-5 xl:gap-6 lg:flex">
+            {navLinks.map((item) => {
+              const sectionId = item.href.replace("/#", "").replace("#", "");
+              const isActive = pathname === "/" && activeSection === sectionId;
+              const isSparkgreen = item.href === "/sparkgreen" && pathname === "/sparkgreen";
+
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive || isSparkgreen ? "page" : undefined}
+                  className={cn(
+                    "group relative text-[13px] font-medium transition-colors duration-200",
+                    onDarkHero ? "text-white/85 hover:text-spark-accent" : "text-spark-primary hover:text-spark-accent",
+                    (isActive || isSparkgreen) && "text-spark-accent",
+                  )}
+                >
+                  {item.label}
+                  <span
+                    className={cn(
+                      "absolute -bottom-1 left-0 h-px bg-spark-accent transition-all duration-200",
+                      isActive || isSparkgreen ? "w-full" : "w-0 group-hover:w-full",
+                    )}
+                  />
+                </a>
+              );
+            })}
+            <Button
+              href="/#contact"
+              variant="primary"
+              className="group px-4 py-2 text-[13px]"
+            >
+              Start Your Engagement
+              <ArrowRight
+                size={14}
+                className="transition-transform duration-200 group-hover:translate-x-0.5"
+                aria-hidden="true"
+              />
+            </Button>
           </div>
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            className={cn(
+              "rounded-full border p-2 transition-colors duration-200 lg:hidden",
+              onDarkHero
+                ? "border-white/25 text-white"
+                : "border-spark-primary/20 text-spark-primary",
+            )}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
 
         <AnimatePresence>
@@ -132,29 +151,28 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="overflow-hidden border-t border-spark-border bg-spark-bg lg:hidden"
+              className="border-t border-white/10 lg:hidden"
             >
-              <div className="container-wide py-4">
-                <nav className="flex flex-col" aria-label="Mobile navigation">
-                  {navLinks.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      className="border-b border-spark-border py-4 text-base font-medium text-spark-primary transition-colors hover:text-spark-accent"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                  <Button
-                    href="/#contact"
-                    variant="primary"
-                    className="mt-4 w-fit"
+              <nav className="flex flex-col px-4 py-3 sm:px-5" aria-label="Mobile navigation">
+                {navLinks.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "border-b py-3.5 text-sm font-medium transition-colors hover:text-spark-accent",
+                      onDarkHero
+                        ? "border-white/10 text-white/90"
+                        : "border-spark-border text-spark-primary",
+                    )}
+                    onClick={() => setIsOpen(false)}
                   >
-                    Start Your Engagement
-                  </Button>
-                </nav>
-              </div>
+                    {item.label}
+                  </a>
+                ))}
+                <Button href="/#contact" variant="primary" className="mt-3 w-full justify-center">
+                  Start Your Engagement
+                </Button>
+              </nav>
             </motion.div>
           )}
         </AnimatePresence>
