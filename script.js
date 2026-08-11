@@ -12,33 +12,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Mobile navigation ---
     const closeMenu = () => {
+        if (!navMenu || !navToggle || !navbar) return;
         navMenu.classList.remove('open');
         navToggle.classList.remove('open');
         navbar.classList.remove('menu-open');
         navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
     };
 
-    navToggle.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('open');
-        navToggle.classList.toggle('open', isOpen);
-        navbar.classList.toggle('menu-open', isOpen);
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-    });
+    if (navToggle && navMenu && navbar) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = navMenu.classList.toggle('open');
+            navToggle.classList.toggle('open', isOpen);
+            navbar.classList.toggle('menu-open', isOpen);
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
 
-    navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMenu();
     });
-
     // --- Navbar state on scroll ---
-    const onScroll = () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 24);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    if (navbar) {
+        const onScroll = () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 24);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
 
     // --- Reveal-on-scroll animations ---
     const revealObserver = new IntersectionObserver((entries) => {
