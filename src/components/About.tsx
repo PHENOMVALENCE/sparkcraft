@@ -1,102 +1,95 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Globe2, Sparkles } from "lucide-react";
 import { aboutParagraphs } from "@/lib/data";
+import Reveal from "@/components/ui/Reveal";
+import Section from "@/components/ui/Section";
 
-const highlights = [
-  { value: "Dar es Salaam", label: "Headquarters" },
-  { value: "Continent-wide", label: "Operating Reach" },
-  { value: "Evidence-led", label: "Every Engagement" },
+const principles = [
+  { label: "Headquarters", value: "Dar es Salaam, Tanzania" },
+  { label: "Operating Reach", value: "Continent-wide" },
+  { label: "Approach", value: "Bespoke · Evidence-led · Ready to engage" },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-32">
-      <div className="container-wide grid items-start gap-16 lg:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-label">WHO WE ARE</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-spark-primary md:text-5xl">
-            Where African Insight Meets Global Ambition
-          </h2>
+    <Section id="about" tone="cream" divider="bottom">
+      <div className="container-wide">
+        <div className="grid items-start gap-14 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <p className="section-label">Who We Are</p>
+            <h2 className="mt-3 text-display-md text-spark-primary">
+              Where African Insight Meets Global Ambition
+            </h2>
 
-          <div className="mt-8 space-y-6 text-base leading-8 text-zinc-700 md:text-lg">
-            {aboutParagraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
+            <div className="mt-8 space-y-5 text-body-lg text-spark-muted">
+              {aboutParagraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+              ))}
+            </div>
 
-          <blockquote className="relative mt-10 overflow-hidden rounded-2xl border-l-4 border-spark-accent bg-spark-dark p-7 text-lg italic text-white shadow-lg">
-            <span
-              className="pointer-events-none absolute -right-4 -top-8 font-serif text-[10rem] leading-none text-spark-accent/10"
-              aria-hidden="true"
-            >
-              &ldquo;
-            </span>
-            We don&apos;t give you a template. We give you the truth about your market.
-          </blockquote>
+            <blockquote className="mt-10 border-l-4 border-spark-accent pl-6 text-xl font-medium italic leading-relaxed text-spark-primary md:text-2xl">
+              We don&apos;t give you a template. We give you the truth about your market.
+            </blockquote>
 
-          <div className="mt-8 space-y-3 text-sm font-medium text-spark-primary md:text-base">
-            <p className="flex items-center gap-2.5">
-              <Globe2 size={18} className="shrink-0 text-spark-accent" aria-hidden="true" />
-              Headquartered In: Dar es Salaam, Tanzania — Operating continent-wide
-            </p>
-            <p className="flex items-center gap-2.5">
-              <Sparkles size={18} className="shrink-0 text-spark-accent" aria-hidden="true" />
-              Our Approach: Bespoke. Evidence-led. Ready to engage.
-            </p>
-          </div>
-        </motion.div>
+            <ul className="mt-10 divide-y divide-spark-border border-y border-spark-border">
+              {principles.map((item) => (
+                <li
+                  key={item.label}
+                  className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:justify-between"
+                >
+                  <span className="text-xs font-semibold uppercase tracking-wider text-spark-accent">
+                    {item.label}
+                  </span>
+                  <span className="text-sm font-medium text-spark-primary md:text-base">
+                    {item.value}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-        <div className="lg:sticky lg:top-28">
-          <div className="relative overflow-hidden rounded-3xl border border-spark-primary/10 bg-[#ebe7dc] p-8 shadow-sm">
-            <div className="absolute -right-12 -top-12 h-48 w-48 rounded-full bg-spark-accent/20" />
-            <div className="absolute -bottom-16 -left-10 h-52 w-52 rounded-full bg-spark-primary/20" />
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-spark-muted">
+              <span className="inline-flex items-center gap-2">
+                <Globe2 size={16} className="text-spark-accent" aria-hidden="true" />
+                Operating continent-wide
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <Sparkles size={16} className="text-spark-accent" aria-hidden="true" />
+                Evidence-led engagements
+              </span>
+            </div>
+          </Reveal>
 
-            <svg
-              viewBox="0 0 420 500"
-              className="relative mx-auto h-[360px] w-full max-w-sm md:h-[420px]"
-              role="img"
-              aria-label="Abstract Africa map"
-            >
-              <path
-                d="M206 32L248 56L274 94L312 108L326 160L302 198L298 246L332 286L314 334L278 364L236 370L214 406L182 444L146 420L126 374L98 342L70 302L78 252L110 212L128 170L160 138L176 96L206 32Z"
-                fill="#1A3C2E"
-                opacity="0.9"
-              />
-              <path
-                d="M182 444L214 406L236 370L278 364"
-                stroke="#C9982A"
-                strokeWidth="5"
-                fill="none"
-              />
-              <circle cx="278" cy="364" r="9" fill="#C9982A" />
-              <circle cx="278" cy="364" r="16" fill="none" stroke="#C9982A" strokeWidth="2" opacity="0.5" />
-            </svg>
-          </div>
-
-          <div className="mt-5 grid grid-cols-3 gap-3">
-            {highlights.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-spark-primary/10 bg-white p-4 text-center shadow-sm"
+          <Reveal delay={0.1} className="lg:sticky lg:top-24 lg:self-start">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-spark-primary/5" aria-hidden="true" />
+              <svg
+                viewBox="0 0 420 500"
+                className="relative mx-auto h-[320px] w-full max-w-md md:h-[400px]"
+                role="img"
+                aria-label="Abstract map of Africa highlighting East African operations"
               >
-                <p className="text-sm font-black leading-tight text-spark-primary md:text-base">
-                  {item.value}
-                </p>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-zinc-500">
-                  {item.label}
-                </p>
-              </div>
-            ))}
-          </div>
+                <path
+                  d="M206 32L248 56L274 94L312 108L326 160L302 198L298 246L332 286L314 334L278 364L236 370L214 406L182 444L146 420L126 374L98 342L70 302L78 252L110 212L128 170L160 138L176 96L206 32Z"
+                  fill="#1A3C2E"
+                  opacity="0.92"
+                />
+                <path
+                  d="M182 444L214 406L236 370L278 364"
+                  stroke="#C9982A"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <circle cx="278" cy="364" r="8" fill="#C9982A" />
+                <circle cx="278" cy="364" r="18" fill="none" stroke="#C9982A" strokeWidth="1.5" opacity="0.5" />
+              </svg>
+              <p className="mt-4 text-center text-xs font-medium uppercase tracking-wider text-spark-muted">
+                Dar es Salaam · East Africa · Continent-wide reach
+              </p>
+            </div>
+          </Reveal>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

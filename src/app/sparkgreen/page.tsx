@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sparkgreen by Sparkcraft",
     description: "Your carbon footprint, measured, reduced and reported — creatively.",
-    url: "https://sparkcraftconsulting.com/sparkgreen",
+    url: "https://sparkcraft.co.tz/sparkgreen",
     siteName: "Sparkcraft Consulting",
     locale: "en_US",
     type: "website",

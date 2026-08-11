@@ -10,7 +10,7 @@ import WhoWeServe from "@/components/WhoWeServe";
 
 export default function Home() {
   return (
-    <main className="overflow-x-hidden">
+    <main id="main-content" className="overflow-x-hidden">
       <Hero />
       <TickerStrip />
       <About />

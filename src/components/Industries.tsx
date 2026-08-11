@@ -1,61 +1,46 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { industries } from "@/lib/data";
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.95 },
-  show: { opacity: 1, y: 0, scale: 1 },
-};
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 export default function Industries() {
-  return (
-    <section id="sectors" className="py-24 md:py-32">
-      <div className="container-wide">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-label">SECTORS</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-spark-primary md:text-5xl">
-            Industries We Cover
-          </h2>
-          <p className="mt-5 max-w-4xl text-zinc-700 md:text-lg">
-            From subsurface to supply chain, Sparkcraft operates across the sectors that define
-            Africa&apos;s economic development trajectory.
-          </p>
-        </motion.div>
+  const midpoint = Math.ceil(industries.length / 2);
+  const columns = [industries.slice(0, midpoint), industries.slice(midpoint)];
 
-        <motion.div
-          className="mt-12 flex flex-wrap gap-3"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {industries.map((item) => (
-            <motion.span
-              key={item}
-              variants={itemVariants}
-              transition={{ duration: 0.4 }}
-              className="cursor-default rounded-full border border-spark-primary bg-spark-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-spark-accent hover:bg-spark-accent hover:text-spark-dark hover:shadow-md md:text-base"
-            >
-              {item}
-            </motion.span>
+  return (
+    <Section id="sectors" tone="cream">
+      <div className="container-wide">
+        <SectionHeader
+          label="Sectors"
+          title="Industries We Cover"
+          description="From subsurface to supply chain, Sparkcraft operates across the sectors that define Africa's economic development trajectory."
+        />
+
+        <div className="mt-12 grid gap-10 md:grid-cols-2 md:gap-16">
+          {columns.map((column, colIndex) => (
+            <Reveal key={colIndex} delay={colIndex * 0.08}>
+              <ul className="divide-y divide-spark-border border-y border-spark-border">
+                {column.map((item, index) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-4 py-4 text-spark-primary transition-colors hover:text-spark-accent"
+                  >
+                    <span
+                      className="text-xs font-black tabular-nums text-spark-accent/50"
+                      aria-hidden="true"
+                    >
+                      {String(colIndex * midpoint + index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-base font-semibold md:text-lg">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

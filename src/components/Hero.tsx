@@ -1,104 +1,104 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
+import Button from "@/components/ui/Button";
+import StatBand from "@/components/ui/StatBand";
+import { fadeUp, transition } from "@/lib/motion";
 
 const stats = [
   { value: "30+", label: "African Markets Covered" },
   { value: "4", label: "Core Advisory Services" },
-  { value: "6", label: "Key Industry Sectors" },
+  { value: "10", label: "Key Industry Sectors" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-spark-dark pt-24 text-white">
+    <section className="relative overflow-hidden bg-spark-dark text-white">
       <div className="grain-overlay absolute inset-0" aria-hidden="true" />
       <div
-        className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-spark-accent/10 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -bottom-48 -left-24 h-[28rem] w-[28rem] rounded-full bg-spark-primary/40 blur-3xl"
+        className="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-spark-accent/8 blur-3xl"
         aria-hidden="true"
       />
 
-      <div className="container-wide relative z-10 py-16 md:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mx-auto flex max-w-4xl flex-col items-center text-center"
-        >
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-spark-accent" aria-hidden="true" />
-            Africa Market Intelligence &amp; Advisory
-          </p>
-
-          <h1 className="text-4xl font-black leading-[1.02] tracking-tightest sm:text-5xl md:text-6xl lg:text-7xl">
-            Africa&apos;s Markets,
-            <br />
-            <span className="relative inline-block">
-              <span className="relative z-10">Decoded for You.</span>
-              <span
-                className="absolute bottom-1 left-0 -z-0 h-3 w-full bg-spark-accent/30 md:h-4"
-                aria-hidden="true"
-              />
-            </span>
-          </h1>
-
-          <p className="mt-7 max-w-2xl text-base leading-8 text-zinc-200 md:text-lg">
-            Sparkcraft Consulting is a leading advisory firm providing business intelligence,
-            market entry strategy, and regulatory navigation for companies entering or
-            expanding across African markets - from Dar es Salaam to the continent.
-          </p>
-
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <a
-              href="#contact"
-              className="rounded-full bg-spark-accent px-7 py-3.5 text-sm font-semibold text-spark-dark shadow-lg shadow-spark-accent/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-spark-accent/30"
-            >
-              Start Your Engagement →
-            </a>
-            <a
-              href="#services"
-              className="rounded-full border border-white/60 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-spark-dark"
-            >
-              Our Services
-            </a>
-          </div>
-
+      <div className="container-wide relative z-10 pt-28 pb-0 md:pt-32">
+        <div className="grid items-end gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <motion.div
-            className="mt-12 grid w-full gap-4 sm:grid-cols-3"
             initial="hidden"
             animate="show"
-            variants={{
-              hidden: {},
-              show: {
-                transition: {
-                  staggerChildren: 0.15,
-                  delayChildren: 0.4,
-                },
-              },
-            }}
+            variants={fadeUp}
+            transition={transition}
           >
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }}
-                transition={{ duration: 0.5 }}
-                className="rounded-2xl border border-white/15 bg-white/[0.03] px-6 py-5 backdrop-blur"
-              >
-                <p className="text-3xl font-black text-spark-accent md:text-4xl">{stat.value}</p>
-                <p className="mt-1.5 text-sm text-zinc-300">{stat.label}</p>
-              </motion.div>
-            ))}
+            <p className="mb-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-spark-accent" aria-hidden="true" />
+              Africa Market Intelligence &amp; Advisory
+            </p>
+
+            <h1 className="text-display-xl text-white">
+              Africa&apos;s Markets,
+              <br />
+              <span className="text-spark-accent">Decoded for You.</span>
+            </h1>
+
+            <p className="mt-6 max-w-prose text-body-lg text-zinc-300">
+              Sparkcraft Consulting provides business intelligence, market entry strategy,
+              and regulatory navigation for companies entering or expanding across African
+              markets — from Dar es Salaam to the continent.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="#contact" variant="primary">
+                Start Your Engagement →
+              </Button>
+              <Button href="#services" variant="secondary" className="text-white border-white/40">
+                Our Services
+              </Button>
+            </div>
+
+            <p className="mt-8 inline-flex items-center gap-2 text-sm text-zinc-400">
+              <MapPin size={14} className="text-spark-accent" aria-hidden="true" />
+              Dar es Salaam, Tanzania · Operating Across Africa
+            </p>
           </motion.div>
 
-          <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-medium text-white/90">
-            <MapPin size={14} className="text-spark-accent" aria-hidden="true" />
-            Dar es Salaam, Tanzania · Operating Across Africa
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ ...transition, delay: 0.15 }}
+            className="hidden lg:block"
+            aria-hidden="true"
+          >
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <svg viewBox="0 0 420 500" className="h-full w-full opacity-90" role="presentation">
+                <path
+                  d="M206 32L248 56L274 94L312 108L326 160L302 198L298 246L332 286L314 334L278 364L236 370L214 406L182 444L146 420L126 374L98 342L70 302L78 252L110 212L128 170L160 138L176 96L206 32Z"
+                  fill="#1A3C2E"
+                  stroke="#C9982A"
+                  strokeWidth="1"
+                  opacity="0.85"
+                />
+                <circle cx="278" cy="364" r="8" fill="#C9982A" />
+                <circle cx="278" cy="364" r="20" fill="none" stroke="#C9982A" strokeWidth="1" opacity="0.4" />
+              </svg>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="mt-12 md:mt-16">
+          <StatBand stats={stats} dark />
+        </div>
+
+        <motion.a
+          href="#about"
+          className="mt-8 mb-6 flex flex-col items-center gap-1 text-xs font-medium uppercase tracking-wider text-white/50 transition-colors hover:text-spark-accent md:mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          aria-label="Scroll to learn more"
+        >
+          <span>Explore</span>
+          <ChevronDown size={16} className="animate-bounce" aria-hidden="true" />
+        </motion.a>
       </div>
     </section>
   );

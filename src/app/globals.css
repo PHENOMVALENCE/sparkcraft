@@ -4,10 +4,16 @@
 
 :root {
   --spark-primary: #1a3c2e;
+  --spark-primary-light: #2a5240;
   --spark-accent: #c9982a;
+  --spark-accent-hover: #d4a83a;
   --spark-bg: #f8f6f1;
+  --spark-surface: #ffffff;
   --spark-dark: #0d1f17;
+  --spark-dark-soft: #142820;
   --spark-text: #1c1c1c;
+  --spark-muted: #5c5c5c;
+  --spark-border: #e5e0d4;
 }
 
 html,
@@ -17,7 +23,7 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -44,28 +50,85 @@ button:focus-visible {
   html {
     scroll-behavior: auto;
   }
-}.container-wide {
-  @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.section-label {
-  @apply text-xs font-semibold uppercase tracking-[0.24em] text-spark-accent;
-}
+@layer components {
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+  }
 
-.grain-overlay {
-  background-image:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.03) 0,
-      rgba(255, 255, 255, 0.03) 2px,
-      transparent 2px,
-      transparent 6px
-    );
-}
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.24em] text-spark-accent;
+  }
 
-.ticker-track {
-  animation: ticker 38s linear infinite;
+  .text-body {
+    @apply text-base leading-7 text-spark-text;
+  }
+
+  .text-body-lg {
+    @apply text-base leading-8 md:text-lg md:leading-8;
+  }
+
+  .text-muted {
+    @apply text-spark-muted;
+  }
+
+  .link-underline {
+    @apply relative inline-block transition-colors duration-200 hover:text-spark-accent;
+  }
+
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-spark-accent transition-all duration-200;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  .editorial-row {
+    @apply grid gap-8 border-b border-spark-border py-8 md:grid-cols-[auto_1fr] md:gap-12 md:py-10;
+  }
+
+  .editorial-row-dark {
+    @apply grid gap-8 border-b border-white/10 py-8 md:grid-cols-[auto_1fr] md:gap-12 md:py-10;
+  }
+
+  .section-divider-top {
+    @apply border-t border-spark-border;
+  }
+
+  .section-divider-bottom {
+    @apply border-b border-spark-border;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-spark-accent focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-spark-dark;
+  }
+
+  .grain-overlay {
+    background-image:
+      linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.03) 0,
+        rgba(255, 255, 255, 0.03) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+  }
+
+  .ticker-track {
+    animation: ticker 38s linear infinite;
+  }
 }
 
 @keyframes ticker {
