@@ -18,6 +18,9 @@ import {
   Sun,
 } from "lucide-react";
 import { useState } from "react";
+import Reveal from "@/components/ui/Reveal";
+import { fadeUp, transition } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
 const approachSteps = [
   {
@@ -194,8 +197,6 @@ const faqs = [
   },
 ];
 
-const segmentIcons = [Building2, HeartHandshake, HeartHandshake, Landmark];
-
 function FaqItem({
   question,
   answer,
@@ -208,21 +209,22 @@ function FaqItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-sg/10 bg-white shadow-sm">
+    <div className="border-b border-sg/15">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-4 p-5 text-left md:p-6"
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
         <span className="text-base font-bold text-sg-dark md:text-lg">{question}</span>
-        <span
-          className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sg-lime/15 text-sg transition-transform duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        >
-          <ChevronDown size={18} aria-hidden="true" />
-        </span>
+        <ChevronDown
+          size={18}
+          className={cn(
+            "shrink-0 text-sg transition-transform duration-200",
+            isOpen && "rotate-180",
+          )}
+          aria-hidden="true"
+        />
       </button>
       <AnimatePresence initial={false}>
         {isOpen && (
@@ -230,9 +232,9 @@ function FaqItem({
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
           >
-            <p className="px-5 pb-5 leading-7 text-zinc-600 md:px-6 md:pb-6">{answer}</p>
+            <p className="pb-5 leading-7 text-zinc-600">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -244,68 +246,50 @@ export default function SparkgreenContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <main className="overflow-x-hidden bg-sg-soft">
-      {/* SECTION 1 — Hero */}
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-sg-dark pt-24 text-white">
+    <main id="main-content" className="overflow-x-hidden bg-sg-soft">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-sg-dark pt-28 pb-16 text-white md:pt-32 md:pb-20">
         <div className="grain-overlay absolute inset-0" aria-hidden="true" />
-        <div
-          className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-sg-lime/10 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -bottom-48 -left-24 h-[28rem] w-[28rem] rounded-full bg-sg/40 blur-3xl"
-          aria-hidden="true"
-        />
-
-        <div className="container-wide relative z-10 py-24 md:py-32">
+        <div className="container-wide relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-5xl"
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            transition={transition}
+            className="max-w-4xl"
           >
             <p className="leading-none">
-              <span className="text-2xl font-black tracking-tightest text-white md:text-3xl">
-                SPARKGREEN
-              </span>
+              <span className="text-2xl font-black tracking-tightest md:text-3xl">SPARKGREEN</span>
               <span className="mt-1 block text-[11px] font-semibold uppercase tracking-wider2 text-sg-lime md:text-xs">
                 A Sustainability Arm of Sparkcraft
               </span>
             </p>
 
-            <p className="mb-6 mt-8 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/90 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-sg-lime" aria-hidden="true" />
-              Sustainability, Reimagined for Tanzania — by Sparkcraft
+            <p className="mb-5 mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              Sustainability, Reimagined for Tanzania
             </p>
 
-            <h1 className="text-4xl font-black leading-[1.02] tracking-tightest sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 className="text-display-xl text-white">
               Your carbon footprint, measured, reduced and reported —{" "}
-              <span className="relative inline-block">
-                <span className="relative z-10">creatively.</span>
-                <span
-                  className="absolute bottom-1 left-0 -z-0 h-3 w-full bg-sg-lime/30 md:h-4"
-                  aria-hidden="true"
-                />
-              </span>
+              <span className="text-sg-lime">creatively.</span>
             </h1>
 
-            <p className="mt-8 max-w-3xl text-base leading-8 text-zinc-200 md:text-lg">
-              Sparkgreen, the sustainability arm of Sparkcraft, partners with companies,
-              organizations and governments to turn climate commitments into verified impact.
-              We go beyond tree planting — deploying creative, scalable solutions that cut
-              emissions today and prove it with digital reporting.
+            <p className="mt-6 max-w-prose-wide text-body-lg text-zinc-300">
+              Sparkgreen partners with companies, organizations and governments to turn climate
+              commitments into verified impact. We go beyond tree planting — deploying creative,
+              scalable solutions that cut emissions today and prove it with digital reporting.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#consultation"
-                className="rounded-full bg-sg-lime px-7 py-3.5 text-sm font-semibold text-sg-dark shadow-lg shadow-sg-lime/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-sg-lime/30"
+                className="inline-flex rounded-full bg-sg-lime px-6 py-3 text-sm font-semibold text-sg-dark transition-colors hover:bg-[#9ccc5a]"
               >
                 Start Your Climate Journey →
               </a>
               <a
                 href="#solutions"
-                className="rounded-full border border-white/60 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white hover:text-sg-dark"
+                className="inline-flex rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-sg-dark"
               >
                 Explore Our Solutions
               </a>
@@ -314,22 +298,15 @@ export default function SparkgreenContent() {
         </div>
       </section>
 
-      {/* SECTION 2 — The Gap We Close */}
-      <section id="gap" className="py-24 md:py-32">
-        <div className="container-wide grid items-start gap-14 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">
-              The Gap We Close
-            </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-sg-dark md:text-5xl">
+      {/* The Gap */}
+      <section id="gap" className="py-20 md:py-28">
+        <div className="container-wide grid gap-14 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">The Gap We Close</p>
+            <h2 className="mt-3 text-display-md text-sg-dark">
               Tree planting alone is not a climate strategy.
             </h2>
-            <div className="mt-8 space-y-6 text-base leading-8 text-zinc-700 md:text-lg">
+            <div className="mt-8 space-y-5 text-body-lg text-zinc-600">
               <p>
                 Trees take decades to mature, are hard to verify, and tell only part of your
                 sustainability story. Meanwhile, your operations, supply chain and communities
@@ -343,315 +320,200 @@ export default function SparkgreenContent() {
                 close both gaps.
               </p>
             </div>
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="rounded-3xl border border-sg/15 bg-white p-8 shadow-md lg:sticky lg:top-28 md:p-10"
-          >
-            <h3 className="text-xl font-bold text-sg-dark">
-              What credible climate action looks like
-            </h3>
-            <ul className="mt-6 space-y-5">
-              {checklist.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-zinc-700">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sg-lime/20">
-                    <Check size={14} className="text-sg" aria-hidden="true" />
-                  </span>
-                  <span className="leading-7">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          <Reveal delay={0.1}>
+            <div className="border-t border-sg/15 pt-8 lg:border-l lg:border-t-0 lg:pl-12 lg:pt-0">
+              <h3 className="text-lg font-bold text-sg-dark">
+                What credible climate action looks like
+              </h3>
+              <ul className="mt-6 divide-y divide-sg/10 border-y border-sg/10">
+                {checklist.map((item) => (
+                  <li key={item} className="flex items-start gap-3 py-4 text-zinc-700">
+                    <Check size={16} className="mt-1 shrink-0 text-sg" aria-hidden="true" />
+                    <span className="leading-7">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* SECTION 3 — Our Approach */}
-      <section id="approach" className="relative overflow-hidden bg-sg-dark py-24 text-white md:py-32">
-        <div
-          className="pointer-events-none absolute -left-40 top-0 h-[30rem] w-[30rem] rounded-full bg-sg-lime/5 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="container-wide relative">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg-lime">
-              Our Approach
+      {/* Approach — horizontal process */}
+      <section id="approach" className="bg-sg-dark py-20 text-white md:py-28">
+        <div className="container-wide">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg-lime">Our Approach</p>
+            <h2 className="mt-3 text-display-md">Measure. Reduce. Offset. Report.</h2>
+            <p className="mt-5 max-w-prose-wide text-body-lg text-zinc-300">
+              One partner for the full journey — from your first carbon baseline to your annual
+              sustainability disclosure.
             </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
-              Measure. Reduce. Offset. Report.
-            </h2>
-            <p className="mt-5 max-w-3xl text-zinc-300 md:text-lg">
-              One partner for the full journey — from your first carbon baseline to your
-              annual sustainability disclosure.
-            </p>
-          </motion.div>
+          </Reveal>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {approachSteps.map((step, index) => (
-              <motion.article
-                key={step.id}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-sg-lime/70 hover:bg-white/[0.05]"
-              >
-                <p
-                  className="pointer-events-none absolute right-4 top-1 text-6xl font-black text-sg-lime/15 transition-colors duration-300 group-hover:text-sg-lime/25"
-                  aria-hidden="true"
-                >
-                  {step.id}
-                </p>
-                <h3 className="relative text-xl font-bold">{step.name}</h3>
-                <p className="relative mt-4 text-sm leading-7 text-zinc-300">
-                  {step.description}
-                </p>
-              </motion.article>
+          <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
+            {approachSteps.map((step) => (
+              <Reveal key={step.id}>
+                <article className="grid gap-4 py-8 md:grid-cols-[80px_200px_1fr] md:gap-8 md:py-10">
+                  <span className="text-sm font-black tabular-nums text-sg-lime/60">{step.id}</span>
+                  <h3 className="text-xl font-bold text-white">{step.name}</h3>
+                  <p className="text-sm leading-7 text-zinc-300 md:text-base">{step.description}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 4 — Solutions Portfolio */}
-      <section id="solutions" className="py-24 md:py-32">
+      {/* Solutions — editorial rows */}
+      <section id="solutions" className="py-20 md:py-28">
         <div className="container-wide">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">
-              Solutions Portfolio
-            </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-sg-dark md:text-5xl">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">Solutions Portfolio</p>
+            <h2 className="mt-3 text-display-md text-sg-dark">
               A portfolio of impact — not a single product.
             </h2>
-            <p className="mt-5 max-w-4xl text-zinc-700 md:text-lg">
-              The world&apos;s most effective climate programs bundle simple, portable, scalable
-              technologies. Each device delivers measurable emission reductions from day one,
-              plus co-benefits your stakeholders can see: health, time savings, income and
-              dignity.
+            <p className="mt-5 max-w-prose-wide text-body-lg text-zinc-600">
+              Each technology delivers measurable emission reductions from day one, plus
+              co-benefits your stakeholders can see: health, time savings, income and dignity.
             </p>
-          </motion.div>
+          </Reveal>
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 divide-y divide-sg/10 border-y border-sg/10">
             {solutions.map((solution, index) => {
               const Icon = solution.icon;
               return (
-                <motion.article
-                  key={solution.title}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-                  className="group flex flex-col rounded-3xl border border-sg/10 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sg-lime/60 hover:shadow-md"
-                >
-                  <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-sg-lime/40 bg-sg-lime/10 text-sg">
-                    <Icon size={22} aria-hidden="true" />
-                  </div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sg-lime">
-                    {solution.tag}
-                  </p>
-                  <h3 className="mt-2 text-lg font-bold leading-snug text-sg-dark">
-                    {solution.title}
-                  </h3>
-                  <p className="mt-3 flex-1 text-sm leading-7 text-zinc-600">
-                    {solution.description}
-                  </p>
-                </motion.article>
+                <Reveal key={solution.title} delay={index * 0.04}>
+                  <article className="grid gap-4 py-8 md:grid-cols-[auto_1fr] md:gap-8 md:py-10">
+                    <Icon size={24} className="mt-1 text-sg" aria-hidden="true" />
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-sg-lime">
+                        {solution.tag}
+                      </p>
+                      <h3 className="mt-1 text-lg font-bold text-sg-dark md:text-xl">
+                        {solution.title}
+                      </h3>
+                      <p className="mt-2 max-w-prose-wide text-sm leading-7 text-zinc-600 md:text-base">
+                        {solution.description}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
               );
             })}
           </div>
 
-          <motion.div
-            className="mt-12 grid gap-6 rounded-3xl bg-sg p-8 text-white sm:grid-cols-3 md:p-10"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            {stats.map((stat) => (
-              <div key={stat.value} className="border-l-2 border-sg-lime/70 pl-4">
-                <p className="text-3xl font-black text-sg-lime md:text-4xl">{stat.value}</p>
-                <p className="mt-2 text-sm leading-6 text-zinc-100">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
+          <Reveal delay={0.1}>
+            <div className="mt-12 grid divide-y border-y border-sg/20 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {stats.map((stat) => (
+                <div key={stat.value} className="px-4 py-8 text-center sm:px-6">
+                  <p className="text-3xl font-black text-sg md:text-4xl">{stat.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* SECTION 5 — Why Sparkgreen */}
-      <section id="why-sparkgreen" className="relative overflow-hidden bg-sg py-24 text-white md:py-32">
-        <div
-          className="pointer-events-none absolute -right-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-sg-lime/10 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="container-wide relative">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg-lime">
-              Why Sparkgreen
-            </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
-              Built for how climate impact actually works.
-            </h2>
-          </motion.div>
+      {/* Why Sparkgreen */}
+      <section id="why-sparkgreen" className="bg-sg py-20 text-white md:py-28">
+        <div className="container-wide">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg-lime">Why Sparkgreen</p>
+            <h2 className="mt-3 text-display-md">Built for how climate impact actually works.</h2>
+          </Reveal>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {differentiators.map((item, index) => {
+          <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
+            {differentiators.map((item) => {
               const Icon = item.icon;
               return (
-                <motion.article
-                  key={item.title}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="rounded-2xl border border-white/15 bg-white/5 p-7 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-sg-lime/60 hover:bg-white/10"
-                >
-                  <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sg-lime/15 text-sg-lime">
-                    <Icon size={20} aria-hidden="true" />
-                  </div>
-                  <h3 className="text-xl font-bold">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-zinc-200">{item.description}</p>
-                </motion.article>
+                <Reveal key={item.title}>
+                  <article className="grid gap-4 py-8 md:grid-cols-[auto_1fr] md:gap-8 md:py-10">
+                    <Icon size={22} className="mt-1 text-sg-lime" aria-hidden="true" />
+                    <div>
+                      <h3 className="text-lg font-bold md:text-xl">{item.title}</h3>
+                      <p className="mt-2 max-w-prose-wide text-sm leading-7 text-zinc-200 md:text-base">
+                        {item.description}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
               );
             })}
           </div>
 
-          <motion.blockquote
-            className="relative mt-12 overflow-hidden rounded-2xl border-l-4 border-sg-lime bg-sg-dark p-7 text-lg italic text-white shadow-lg"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span
-              className="pointer-events-none absolute -right-4 -top-8 font-serif text-[10rem] leading-none text-sg-lime/10"
-              aria-hidden="true"
-            >
-              &ldquo;
-            </span>
-            [Testimonial placeholder — quote from an early corporate partner or pilot
-            organization describing measurable results and reporting quality.]
-            <footer className="mt-4 text-sm font-semibold not-italic text-sg-lime">
-              — Name, Title, Organization
-            </footer>
-          </motion.blockquote>
+          <Reveal delay={0.1}>
+            <blockquote className="mt-12 border-l-4 border-sg-lime pl-6 text-lg italic leading-relaxed text-white/90 md:text-xl">
+              Partner organizations report measurable reductions within the first quarter of
+              deployment — with digital verification that stands up to board and auditor scrutiny.
+              <footer className="mt-4 text-sm font-semibold not-italic text-sg-lime">
+                — Sparkgreen pilot partner
+              </footer>
+            </blockquote>
+          </Reveal>
         </div>
       </section>
 
-      {/* SECTION 6 — Who We Work With */}
-      <section id="who-we-work-with" className="py-24 md:py-32">
+      {/* Who We Work With */}
+      <section id="who-we-work-with" className="py-20 md:py-28">
         <div className="container-wide">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">
-              Who We Work With
-            </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-sg-dark md:text-5xl">
-              For every organization ready to lead.
-            </h2>
-          </motion.div>
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">Who We Work With</p>
+            <h2 className="mt-3 text-display-md text-sg-dark">For every organization ready to lead.</h2>
+          </Reveal>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 divide-y divide-sg/10 border-y border-sg/10">
             {segments.map((segment, index) => {
-              const Icon = segmentIcons[index];
+              const Icon = segment.icon;
               return (
-                <motion.article
-                  key={segment.title}
-                  initial={{ opacity: 0, y: 32 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="group rounded-2xl border border-sg/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sg-lime/50 hover:shadow-md"
-                >
-                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sg-lime/15 text-sg">
-                    <Icon size={20} aria-hidden="true" />
-                  </div>
-                  <h3 className="text-lg font-bold leading-snug text-sg-dark">
-                    {segment.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-zinc-600">{segment.description}</p>
-                </motion.article>
+                <Reveal key={segment.title} delay={index * 0.05}>
+                  <article className="grid gap-4 py-8 md:grid-cols-[auto_1fr] md:gap-8 md:py-10">
+                    <Icon size={22} className="mt-1 text-sg" aria-hidden="true" />
+                    <div>
+                      <h3 className="text-lg font-bold text-sg-dark">{segment.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-zinc-600 md:text-base">
+                        {segment.description}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* SECTION 7 — CTA Band */}
-      <section
-        id="consultation"
-        className="relative overflow-hidden bg-gradient-to-r from-sg to-sg-dark py-24 text-white md:py-28"
-      >
-        <div
-          className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-sg-lime/10 blur-2xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -bottom-32 -right-16 h-96 w-96 rounded-full bg-white/5 blur-3xl"
-          aria-hidden="true"
-        />
-        <div className="container-wide relative text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="mx-auto max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
-              Ready to move beyond tree planting?
-            </h2>
-            <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-zinc-100 md:text-lg">
+      {/* CTA */}
+      <section id="consultation" className="bg-sg-dark py-20 text-white md:py-28">
+        <div className="container-wide mx-auto max-w-3xl text-center">
+          <Reveal>
+            <h2 className="text-display-md">Ready to move beyond tree planting?</h2>
+            <p className="mx-auto mt-6 text-body-lg text-zinc-300">
               Book a free carbon consultation. We&apos;ll assess your footprint, show you what a
-              creative reduction portfolio could look like, and demonstrate the digital
-              reporting your stakeholders are waiting for.
+              creative reduction portfolio could look like, and demonstrate the digital reporting
+              your stakeholders are waiting for.
             </p>
             <a
               href="mailto:hello@sparkgreen.co.tz"
-              className="mt-10 inline-flex rounded-full bg-sg-lime px-8 py-4 text-sm font-semibold text-sg-dark shadow-lg shadow-sg-lime/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-sg-lime/30"
+              className="mt-8 inline-flex rounded-full bg-sg-lime px-8 py-3.5 text-sm font-semibold text-sg-dark transition-colors hover:bg-[#9ccc5a]"
             >
               Book a Free Consultation →
             </a>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
 
-      {/* SECTION 8 — FAQ */}
-      <section id="faq" className="py-24 md:py-32">
+      {/* FAQ */}
+      <section id="faq" className="py-20 md:py-28">
         <div className="container-wide">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
+          <Reveal className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sg">FAQ</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-sg-dark md:text-5xl">
-              Frequently Asked Questions
-            </h2>
-          </motion.div>
+            <h2 className="mt-3 text-display-md text-sg-dark">Frequently Asked Questions</h2>
+          </Reveal>
 
-          <div className="mx-auto mt-12 grid max-w-3xl gap-4">
+          <div className="mx-auto mt-10 max-w-3xl border-t border-sg/15">
             {faqs.map((faq, index) => (
               <FaqItem
                 key={faq.question}
@@ -665,47 +527,45 @@ export default function SparkgreenContent() {
         </div>
       </section>
 
-      {/* SECTION 9 — Sparkgreen footer band (global Sparkcraft footer follows) */}
-      <section className="bg-sg-dark py-16 text-white">
-        <div className="container-wide">
-          <div className="grid gap-10 lg:grid-cols-2">
-            <div>
-              <p className="leading-none">
-                <span className="block text-xl font-black tracking-tightest text-white md:text-2xl">
-                  SPARKGREEN
-                </span>
-                <span className="block text-[10px] font-semibold uppercase tracking-wider2 text-sg-lime md:text-xs">
-                  A Sparkcraft Company
-                </span>
-              </p>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-300">
-                Sparkgreen is the sustainability arm of Sparkcraft — creative solutions that
-                drive environmental change and climate impact at scale. We help organizations
-                measure, reduce, offset and digitally report their carbon footprint, with a
-                partner built for Tanzania.
-              </p>
-            </div>
-            <div className="lg:text-right">
-              <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium lg:justify-end" aria-label="Sparkgreen links">
-                <a href="#approach" className="transition-colors hover:text-sg-lime">Our Approach</a>
-                <a href="#solutions" className="transition-colors hover:text-sg-lime">Solutions</a>
-                <a href="#why-sparkgreen" className="transition-colors hover:text-sg-lime">Why Sparkgreen</a>
-                <a href="#faq" className="transition-colors hover:text-sg-lime">FAQ</a>
-                <a href="/" className="transition-colors hover:text-sg-lime">Back to Sparkcraft main site</a>
-              </nav>
-              <p className="mt-5 text-sm text-zinc-300">
-                <a href="mailto:hello@sparkgreen.co.tz" className="transition-colors hover:text-sg-lime">
-                  hello@sparkgreen.co.tz
-                </a>{" "}
-                · Dar es Salaam, Tanzania
-              </p>
-              <p className="mt-3 text-xs text-zinc-400">
-                © 2026 Sparkgreen, a Sparkcraft company. All rights reserved.
-              </p>
-            </div>
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-sg-dark py-14 text-white">
+        <div className="container-wide grid gap-10 lg:grid-cols-2">
+          <div>
+            <p className="leading-none">
+              <span className="block text-xl font-black tracking-tightest md:text-2xl">SPARKGREEN</span>
+              <span className="block text-[10px] font-semibold uppercase tracking-wider2 text-sg-lime md:text-xs">
+                A Sparkcraft Company
+              </span>
+            </p>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-400">
+              Sparkgreen is the sustainability arm of Sparkcraft — helping organizations measure,
+              reduce, offset and digitally report their carbon footprint, with a partner built
+              for Tanzania.
+            </p>
+          </div>
+          <div className="lg:text-right">
+            <nav
+              className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium lg:justify-end"
+              aria-label="Sparkgreen links"
+            >
+              <a href="#approach" className="link-underline text-zinc-400 hover:text-sg-lime">Our Approach</a>
+              <a href="#solutions" className="link-underline text-zinc-400 hover:text-sg-lime">Solutions</a>
+              <a href="#why-sparkgreen" className="link-underline text-zinc-400 hover:text-sg-lime">Why Sparkgreen</a>
+              <a href="#faq" className="link-underline text-zinc-400 hover:text-sg-lime">FAQ</a>
+              <a href="/" className="link-underline text-zinc-400 hover:text-sg-lime">Back to Sparkcraft</a>
+            </nav>
+            <p className="mt-5 text-sm text-zinc-400">
+              <a href="mailto:hello@sparkgreen.co.tz" className="transition-colors hover:text-sg-lime">
+                hello@sparkgreen.co.tz
+              </a>{" "}
+              · Dar es Salaam, Tanzania
+            </p>
+            <p className="mt-3 text-xs text-zinc-500">
+              © {new Date().getFullYear()} Sparkgreen, a Sparkcraft company. All rights reserved.
+            </p>
           </div>
         </div>
-      </section>
+      </footer>
     </main>
   );
 }
