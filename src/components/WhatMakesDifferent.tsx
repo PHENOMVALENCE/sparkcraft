@@ -1,69 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { expertiseItems } from "@/lib/data";
-
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0 },
-};
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 export default function WhatMakesDifferent() {
   return (
-    <section id="expertise" className="bg-spark-bg py-24 md:py-32">
+    <Section id="expertise" tone="light" divider="both">
       <div className="container-wide">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-label">OUR EXPERTISE</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-spark-primary md:text-5xl">
-            What Makes Us Different
-          </h2>
-          <p className="mt-5 max-w-4xl text-zinc-700 md:text-lg">
-            Sparkcraft Consulting is not a generalist firm. We are specialists — in Africa, in
-            extractives, in the regulatory environments that define commercial success on this
-            continent. Our depth is our differentiation.
-          </p>
-        </motion.div>
+        <SectionHeader
+          label="Our Expertise"
+          title="What Makes Us Different"
+          description="Sparkcraft Consulting is not a generalist firm. We are specialists — in Africa, in extractives, and in the regulatory environments that define commercial success on this continent."
+        />
 
-        <motion.div
-          className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.05 }}
-        >
+        <div className="mt-14 columns-1 gap-x-12 md:columns-2">
           {expertiseItems.map((item, index) => (
-            <motion.article
-              key={item.title}
-              variants={itemVariants}
-              transition={{ duration: 0.5 }}
-              className="group rounded-2xl border border-spark-primary/10 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-spark-accent/50 hover:shadow-md"
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <div className="h-8 w-1 rounded bg-spark-primary transition-colors duration-300 group-hover:bg-spark-accent" />
-                <span className="text-sm font-black text-spark-primary/20 transition-colors duration-300 group-hover:text-spark-accent/40">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold leading-snug text-spark-primary">{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-700">{item.description}</p>
-            </motion.article>
+            <Reveal key={item.title} delay={(index % 4) * 0.05}>
+              <article className="mb-0 break-inside-avoid border-b border-spark-border py-7 first:pt-0">
+                <div className="flex gap-5">
+                  <span
+                    className="shrink-0 text-sm font-black tabular-nums text-spark-accent/60"
+                    aria-hidden="true"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-bold leading-snug text-spark-primary">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-7 text-spark-muted">{item.description}</p>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

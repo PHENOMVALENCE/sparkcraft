@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sparkcraft.co.tz"),
   title: "Sparkcraft Consulting | Africa Market Intelligence & Advisory",
   description:
     "Leading advisory firm providing business intelligence, market entry strategy, and regulatory navigation across 30+ African markets. Headquartered in Dar es Salaam, Tanzania.",
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sparkcraft Consulting",
     description: "Africa's Markets, Decoded for You.",
-    url: "https://sparkcraftconsulting.com",
+    url: "https://sparkcraft.co.tz",
     siteName: "Sparkcraft Consulting",
     locale: "en_US",
     type: "website",
@@ -39,6 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} bg-spark-bg font-sans text-spark-text antialiased`}>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         <Navbar />
         {children}
         <Footer />
