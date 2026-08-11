@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Banknote,
   Building2,
@@ -10,57 +9,50 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { whoWeServeItems } from "@/lib/data";
+import Section from "@/components/ui/Section";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 const serveIcons = [Globe2, Banknote, TrendingUp, Building2, ClipboardCheck, HardHat];
 
 export default function WhoWeServe() {
   return (
-    <section
-      id="who-we-serve"
-      className="relative overflow-hidden bg-spark-dark py-24 text-white md:py-32"
-    >
-      <div
-        className="pointer-events-none absolute -right-32 -top-32 h-[26rem] w-[26rem] rounded-full bg-spark-accent/10 blur-3xl"
-        aria-hidden="true"
-      />
+    <Section id="who-we-serve" tone="dark">
+      <div className="container-wide">
+        <SectionHeader
+          label="Who We Serve"
+          title="Built for Companies Serious About Africa"
+          dark
+        />
 
-      <div className="container-wide relative">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="section-label">WHO WE SERVE</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
-            Built for Companies Serious About Africa
-          </h2>
-        </motion.div>
-
-        <div className="-mx-6 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3">
+        <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
           {whoWeServeItems.map((item, index) => {
             const Icon = serveIcons[index % serveIcons.length];
             return (
-              <motion.article
-                key={item.title}
-                className="min-w-[85%] snap-start rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-spark-accent/60 hover:bg-white/10 md:min-w-0"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-              >
-                <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-spark-accent/15 text-spark-accent">
-                  <Icon size={20} aria-hidden="true" />
-                </div>
-                <h3 className="text-xl font-bold text-spark-accent">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-zinc-200 md:text-base">
-                  {item.description}
-                </p>
-              </motion.article>
+              <Reveal key={item.title} delay={index * 0.05}>
+                <article className="editorial-row-dark group">
+                  <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-2">
+                    <Icon
+                      size={22}
+                      className="shrink-0 text-spark-accent transition-transform duration-200 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                    <span className="text-xs font-semibold uppercase tracking-wider text-white/40">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white md:text-xl">{item.title}</h3>
+                    <p className="mt-2 max-w-prose-wide text-sm leading-7 text-zinc-300 md:text-base">
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
+              </Reveal>
             );
           })}
         </div>
       </div>
-    </section>
+    </Section>
   );
 }
