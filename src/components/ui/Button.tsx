@@ -11,7 +11,7 @@ type ButtonBaseProps = {
 
 type ButtonAsLink = ButtonBaseProps & {
   href: string;
-  onClick?: never;
+  onClick?: () => void;
 };
 
 type ButtonAsButton = ButtonBaseProps & {
@@ -47,13 +47,13 @@ export default function Button(props: ButtonAsLink | ButtonAsButton) {
     const isExternal = props.href.startsWith("http") || props.href.startsWith("mailto:");
     if (isExternal || props.href.startsWith("#") || props.href.includes("#")) {
       return (
-        <a href={props.href} className={classes}>
+        <a href={props.href} className={classes} onClick={props.onClick}>
           {children}
         </a>
       );
     }
     return (
-      <Link href={props.href} className={classes}>
+      <Link href={props.href} className={classes} onClick={props.onClick}>
         {children}
       </Link>
     );

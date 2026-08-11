@@ -21,7 +21,9 @@ export default function Navbar() {
   const { scrollY } = useScroll();
 
   const onHomeOrSparkgreen = pathname === "/" || pathname === "/sparkgreen";
-  const onDarkHero = onHomeOrSparkgreen && !scrolled && !isOpen;
+  const isOverDarkHero = onHomeOrSparkgreen && !scrolled;
+  // When the mobile menu is open, always use the light shell for readable contrast.
+  const useLightNav = isOpen || !isOverDarkHero;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 16);
@@ -65,10 +67,10 @@ export default function Navbar() {
       <motion.nav
         className={cn(
           "pointer-events-auto mx-auto max-w-6xl overflow-hidden rounded-2xl border transition-all duration-300",
-          onDarkHero
-            ? "border-white/10 bg-spark-dark/80 shadow-lg shadow-black/25 backdrop-blur-md"
-            : "border-spark-border/70 bg-spark-bg/92 shadow-md backdrop-blur-md",
-          scrolled && "shadow-lg",
+          useLightNav
+            ? "border-spark-border bg-spark-bg shadow-lg"
+            : "border-white/10 bg-spark-dark/85 shadow-lg shadow-black/25 backdrop-blur-md",
+          scrolled && !isOpen && "shadow-lg",
         )}
         initial={false}
       >
@@ -77,7 +79,7 @@ export default function Navbar() {
             <span
               className={cn(
                 "block text-lg font-black tracking-tightest transition-colors duration-300 sm:text-xl",
-                onDarkHero ? "text-white" : "text-spark-primary",
+                useLightNav ? "text-spark-primary" : "text-white",
               )}
             >
               SPARKCRAFT
@@ -87,7 +89,7 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <div className="hidden items-center gap-5 xl:gap-6 lg:flex">
+          <div className="hidden items-center gap-5 lg:flex xl:gap-6">
             {navLinks.map((item) => {
               const sectionId = item.href.replace("/#", "").replace("#", "");
               const isActive = pathname === "/" && activeSection === sectionId;
@@ -100,7 +102,9 @@ export default function Navbar() {
                   aria-current={isActive || isSparkgreen ? "page" : undefined}
                   className={cn(
                     "group relative text-[13px] font-medium transition-colors duration-200",
-                    onDarkHero ? "text-white/85 hover:text-spark-accent" : "text-spark-primary hover:text-spark-accent",
+                    useLightNav
+                      ? "text-spark-primary hover:text-spark-accent"
+                      : "text-white/85 hover:text-spark-accent",
                     (isActive || isSparkgreen) && "text-spark-accent",
                   )}
                 >
@@ -133,9 +137,9 @@ export default function Navbar() {
             onClick={() => setIsOpen((prev) => !prev)}
             className={cn(
               "rounded-full border p-2 transition-colors duration-200 lg:hidden",
-              onDarkHero
-                ? "border-white/25 text-white"
-                : "border-spark-primary/20 text-spark-primary",
+              useLightNav
+                ? "border-spark-primary/20 text-spark-primary hover:border-spark-accent hover:text-spark-accent"
+                : "border-white/25 text-white hover:border-spark-accent hover:text-spark-accent",
             )}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
@@ -151,25 +155,38 @@ export default function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
-              className="border-t border-white/10 lg:hidden"
+              className="border-t border-spark-border bg-spark-bg lg:hidden"
             >
               <nav className="flex flex-col px-4 py-3 sm:px-5" aria-label="Mobile navigation">
-                {navLinks.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "border-b py-3.5 text-sm font-medium transition-colors hover:text-spark-accent",
-                      onDarkHero
-                        ? "border-white/10 text-white/90"
-                        : "border-spark-border text-spark-primary",
-                    )}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-                <Button href="/#contact" variant="primary" className="mt-3 w-full justify-center">
+                {navLinks.map((item) => {
+                  const sectionId = item.href.replace("/#", "").replace("#", "");
+                  const isActive = pathname === "/" && activeSection === sectionId;
+                  const isSparkgreen =
+                    item.href === "/sparkgreen" && pathname === "/sparkgreen";
+
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      aria-current={isActive || isSparkgreen ? "page" : undefined}
+                      className={cn(
+                        "border-b border-spark-border py-3.5 text-base font-medium transition-colors",
+                        isActive || isSparkgreen
+                          ? "text-spark-accent"
+                          : "text-spark-primary hover:text-spark-accent",
+                      )}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                })}
+                <Button
+                  href="/#contact"
+                  variant="primary"
+                  className="mt-4 w-full justify-center py-3"
+                  onClick={() => setIsOpen(false)}
+                >
                   Start Your Engagement
                 </Button>
               </nav>
