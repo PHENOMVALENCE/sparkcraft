@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://sparkcraft.co.tz";
-export const SITE_NAME = "Sparkcraft Consulting";
+export const SITE_NAME = "Sparkcraft Technologies";
 
 function normalizePath(path: string) {
   if (!path || path === "/") return "";
@@ -55,7 +55,7 @@ export function createPageMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: `${SITE_NAME} — Africa market intelligence and advisory`,
+          alt: `${SITE_NAME} — intelligence and infrastructure for African markets`,
         },
       ],
     },

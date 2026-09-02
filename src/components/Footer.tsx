@@ -22,15 +22,20 @@ const footerCols: Record<string, { label: string; href: string }[]> = {
     { label: "About Us", href: "/#about" },
     { label: "Who We Serve", href: "/#who-we-serve" },
     { label: "Sectors", href: "/#sectors" },
-    { label: "Sparkgreen", href: "/sparkgreen" },
     { label: "Contact", href: "/#contact" },
+  ],
+  Ventures: [
+    { label: "FinSpark", href: "/finspark" },
+    { label: "Sparkgreen", href: "/sparkgreen" },
+    { label: "All ventures", href: "/#ventures" },
   ],
 };
 
 export default function Footer() {
   const pathname = usePathname();
 
-  if (pathname === "/sparkgreen") {
+  // Sparkgreen and FinSpark each ship their own venture-specific footer.
+  if (pathname === "/sparkgreen" || pathname === "/finspark") {
     return null;
   }
 
@@ -49,12 +54,13 @@ export default function Footer() {
                   SPARKCRAFT
                 </span>
                 <span className="block text-[10px] font-semibold uppercase tracking-wider2 text-spark-accent md:text-xs">
-                  CONSULTING
+                  TECHNOLOGIES
                 </span>
               </Link>
               <p className="mt-4 text-sm leading-7 text-zinc-400">
-                Africa market intelligence and advisory — helping organisations navigate
-                complexity with evidence-led strategy.
+                Intelligence and infrastructure for African markets — helping organisations
+                operate, invest and create measurable impact. Home of FinSpark and
+                Sparkgreen.
               </p>
             </div>
 
@@ -69,7 +75,7 @@ export default function Footer() {
           </div>
         </Reveal>
 
-        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {Object.entries(footerCols).map(([title, items]) => (
             <div key={title}>
               <h3 className="text-xs font-semibold uppercase tracking-[0.16em] text-spark-accent">
@@ -120,7 +126,7 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-white/10 pt-6 text-xs text-zinc-500 md:text-sm">
           <p>
-            © {new Date().getFullYear()} Sparkcraft Consulting. All rights reserved.
+            © {new Date().getFullYear()} Sparkcraft Technologies. All rights reserved.
           </p>
         </div>
       </div>

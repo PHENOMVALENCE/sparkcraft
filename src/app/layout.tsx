@@ -15,17 +15,18 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | Africa Market Intelligence & Advisory`,
+    default: `${SITE_NAME} | Intelligence & Infrastructure for African Markets`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Leading advisory firm providing business intelligence, market entry strategy, and regulatory navigation across 30+ African markets. Headquartered in Dar es Salaam, Tanzania.",
+    "Sparkcraft Technologies builds intelligence and infrastructure that help organisations operate, invest and create measurable impact across African markets. Home of FinSpark and Sparkgreen. Headquartered in Dar es Salaam, Tanzania.",
   keywords: [
     "Africa market entry",
-    "Tanzania advisory",
+    "Tanzania technology company",
     "market intelligence Africa",
-    "mining compliance Africa",
-    "government relations Tanzania",
+    "last-mile financial infrastructure",
+    "FinSpark",
+    "Sparkgreen",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,

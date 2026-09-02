@@ -163,3 +163,116 @@ button:focus-visible {
     animation-iteration-count: 1;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   FinSpark — route-scoped design tokens.
+
+   Applied via the `.finspark-theme` wrapper on /finspark so the global
+   Sparkcraft palette is untouched elsewhere. Contrast checked against WCAG AA:
+   gold and teal-light are used on navy only; teal-deep and ink carry text on
+   the light canvas.
+   --------------------------------------------------------------------------- */
+.finspark-theme {
+  --fs-navy: #0b2545;
+  --fs-navy-2: #123a66;
+  --fs-navy-3: #071a33;
+  --fs-gold: #c8a951;
+  --fs-gold-bright: #dcbe6a;
+  --fs-teal: #0f6a70;
+  --fs-teal-light: #1fa0a8;
+  --fs-ink: #1b2530;
+  --fs-slate: #55636f;
+  --fs-canvas: #f5f7f8;
+  --fs-line: #d8dee3;
+  --fs-line-dark: rgba(255, 255, 255, 0.14);
+}
+
+@layer components {
+  /* Fine ledger grid used behind dark FinSpark panels. Decorative only. */
+  .fs-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .fs-grid-light {
+    background-image:
+      linear-gradient(to right, rgba(11, 37, 69, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 37, 69, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Hairline rule with a gold signal segment at its head. */
+  .fs-rule {
+    background-image: linear-gradient(
+      to right,
+      var(--fs-gold) 0,
+      var(--fs-gold) 56px,
+      var(--fs-line) 56px,
+      var(--fs-line) 100%
+    );
+  }
+
+  .fs-rule-dark {
+    background-image: linear-gradient(
+      to right,
+      var(--fs-gold) 0,
+      var(--fs-gold) 56px,
+      rgba(255, 255, 255, 0.16) 56px,
+      rgba(255, 255, 255, 0.16) 100%
+    );
+  }
+
+  .fs-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em];
+  }
+
+  .fs-display {
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    font-size: clamp(2rem, 4.6vw, 3.75rem);
+  }
+
+  .fs-heading {
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  }
+
+  /* Focus ring tuned for the navy surfaces on /finspark. */
+  .finspark-theme a:focus-visible,
+  .finspark-theme button:focus-visible {
+    outline: 2px solid var(--fs-gold-bright);
+    outline-offset: 3px;
+  }
+}
+
+/* Legibility Loop connector pulse. Decorative; the global
+   prefers-reduced-motion block already neutralises the animation. */
+@keyframes fs-signal {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.fs-signal-track {
+  overflow: hidden;
+}
+
+.fs-signal-pulse {
+  animation: fs-signal 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-signal-pulse {
+    animation: none;
+    opacity: 0.5;
+    transform: none;
+  }
+}

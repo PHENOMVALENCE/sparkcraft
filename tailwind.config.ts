@@ -22,6 +22,20 @@ const config: Config = {
           muted: "#5C5C5C",
           border: "#E5E0D4",
         },
+        // FinSpark venture palette — used only under /finspark.
+        fs: {
+          navy: "#0B2545",
+          "navy-2": "#123A66",
+          "navy-3": "#071A33",
+          gold: "#C8A951",
+          "gold-bright": "#DCBE6A",
+          teal: "#0F6A70",
+          "teal-light": "#1FA0A8",
+          ink: "#1B2530",
+          slate: "#55636F",
+          canvas: "#F5F7F8",
+          line: "#D8DEE3",
+        },
         sg: {
           DEFAULT: "#1E6B3C",
           dark: "#14522C",

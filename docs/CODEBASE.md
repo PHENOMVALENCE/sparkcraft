@@ -13,8 +13,17 @@ sparkcraft/
 │   │   ├── layout.tsx          # Root layout, metadata, Navbar/Footer shell
 │   │   ├── page.tsx            # Homepage route (/)
 │   │   ├── globals.css         # Global styles, CSS variables, utilities
+│   │   ├── icon.svg            # Favicon
+│   │   ├── apple-icon.svg      # Apple touch icon
+│   │   ├── opengraph-image.tsx # Dynamic OG image for /
+│   │   ├── robots.ts           # /robots.txt
+│   │   ├── sitemap.ts          # /sitemap.xml
+│   │   ├── finspark/
+│   │   │   ├── page.tsx            # FinSpark route (/finspark)
+│   │   │   └── opengraph-image.tsx # Dynamic OG image for /finspark
 │   │   └── sparkgreen/
-│   │       └── page.tsx        # Sparkgreen route (/sparkgreen)
+│   │       ├── page.tsx            # Sparkgreen route (/sparkgreen)
+│   │       └── opengraph-image.tsx # Dynamic OG image for /sparkgreen
 │   ├── components/
 │   │   ├── About.tsx
 │   │   ├── BIReports.tsx
@@ -22,15 +31,36 @@ sparkcraft/
 │   │   ├── Footer.tsx
 │   │   ├── Hero.tsx
 │   │   ├── Industries.tsx
+│   │   ├── JsonLd.tsx
 │   │   ├── Navbar.tsx
+│   │   ├── Portfolio.tsx       # Homepage Ventures section
 │   │   ├── Services.tsx
 │   │   ├── TickerStrip.tsx
 │   │   ├── WhatMakesDifferent.tsx
 │   │   ├── WhoWeServe.tsx
+│   │   ├── ui/                 # Button, Reveal, Section, SectionHeader, StatBand
+│   │   ├── finspark/
+│   │   │   ├── FinSparkContent.tsx   # Assembles the /finspark page
+│   │   │   ├── FinSparkHero.tsx
+│   │   │   ├── FinSparkSection.tsx   # Shared section shell + heading
+│   │   │   ├── SignalMark.tsx        # Decorative hero SVG
+│   │   │   ├── EvidenceBand.tsx      # Sourced statistics + citations
+│   │   │   ├── ProblemSection.tsx
+│   │   │   ├── OperatingModel.tsx
+│   │   │   ├── ProductGrid.tsx       # Score / Tag / Reach / Till
+│   │   │   ├── LegibilityLoop.tsx
+│   │   │   ├── AudienceGrid.tsx
+│   │   │   ├── WhySparkcraft.tsx
+│   │   │   ├── FinSparkCTA.tsx
+│   │   │   └── FinSparkFooter.tsx
 │   │   └── sparkgreen/
 │   │       └── SparkgreenContent.tsx
 │   └── lib/
-│       └── data.ts             # Homepage content constants
+│       ├── data.ts             # Homepage + ventures content constants
+│       ├── finspark-data.ts    # FinSpark content constants
+│       ├── motion.ts           # Framer Motion variants
+│       ├── seo.ts              # SITE_NAME/SITE_URL + createPageMetadata
+│       └── utils.ts            # cn() class joiner
 ├── docs/                       # Technical documentation
 ├── index.html                  # LEGACY — static homepage
 ├── sparkgreen.html             # LEGACY — static Sparkgreen page
@@ -49,7 +79,7 @@ sparkcraft/
 
 **Notable absences:**
 
-- No `public/` directory (no favicon, robots.txt, sitemap, or static assets)
+- No `public/` directory — icons, robots, sitemap and OG images are all App Router file conventions under `src/app/`
 - No `src/app/api/` (no API routes)
 - No test directory
 - No `.env` or `.env.example` (created during this audit)
@@ -72,8 +102,9 @@ sparkcraft/
 
 | Route | Purpose | Primary Components | Data Source | SEO Metadata | Auth | Status |
 |-------|---------|-------------------|-------------|--------------|------|--------|
-| `/` | Sparkcraft homepage — market intelligence advisory | Hero, TickerStrip, About, Services, WhatMakesDifferent, WhoWeServe, Industries, BIReports, CTA | `src/lib/data.ts` | Root `layout.tsx` metadata | None | Complete |
-| `/sparkgreen` | Sparkgreen sustainability subsidiary landing page | SparkgreenContent (9 sections) | Inline arrays in component | `sparkgreen/page.tsx` metadata | None | Complete |
+| `/` | Sparkcraft Technologies group homepage | Hero, TickerStrip, About, Services, WhatMakesDifferent, WhoWeServe, Portfolio, Industries, BIReports, CTA | `src/lib/data.ts` | `page.tsx` via `createPageMetadata` | None | Complete |
+| `/finspark` | FinSpark — last-mile financial infrastructure | FinSparkContent (9 sections + own footer) | `src/lib/finspark-data.ts` | `finspark/page.tsx` metadata + WebPage JSON-LD | None | Complete |
+| `/sparkgreen` | Sparkgreen sustainability venture landing page | SparkgreenContent (9 sections) | Inline arrays in component | `sparkgreen/page.tsx` metadata | None | Complete |
 | `/_not-found` | 404 page | Next.js default | — | Inherits root | None | Default |
 
 ### Homepage Anchor Sections
@@ -86,9 +117,24 @@ sparkcraft/
 | `#services` | Services | Four core advisory services |
 | `#expertise` | WhatMakesDifferent | Eight expertise cards |
 | `#who-we-serve` | WhoWeServe | Six audience segments |
+| `#ventures` | Portfolio | FinSpark and Sparkgreen venture cards |
 | `#sectors` | Industries | Ten industry pills |
 | — | BIReports | Business intelligence promo |
 | `#contact` | CTA | Contact channels |
+
+### FinSpark Anchor Sections
+
+| Anchor ID | Component | Purpose |
+|-----------|-----------|---------|
+| (hero) | FinSparkHero | Headline, endorsement and both CTAs |
+| — | EvidenceBand | Four sourced statistics with citation links |
+| `#problem` | ProblemSection | Four-point problem argument + pull quote |
+| `#model` | OperatingModel | What FinSpark is and is not; three principles |
+| `#products` | ProductGrid | Score, Tag, Reach, Till |
+| `#loop` | LegibilityLoop | Four-stage diagram + text equivalent |
+| `#audiences` | AudienceGrid | Four partner types |
+| `#why-sparkcraft` | WhySparkcraft | Parent-company positioning |
+| `#partner` | FinSparkCTA | Partnership mailto + contact channels |
 
 ### Sparkgreen Anchor Sections
 
@@ -111,8 +157,9 @@ sparkcraft/
 
 | Component | Location | Responsibility | Client/Server | Used By |
 |-----------|----------|----------------|---------------|---------|
-| Navbar | `src/components/Navbar.tsx` | Fixed header, scroll-aware styling, mobile drawer | Client | All routes (via layout) |
-| Footer | `src/components/Footer.tsx` | Site-wide footer with link columns and contact | Client | All routes (via layout) |
+| Navbar | `src/components/Navbar.tsx` | Fixed header, scroll-aware styling, Ventures dropdown, mobile drawer, FinSpark colour variant | Client | All routes (via layout) |
+| Footer | `src/components/Footer.tsx` | Group footer; returns `null` on `/finspark` and `/sparkgreen`, which ship their own | Client | All routes (via layout) |
+| JsonLd | `src/components/JsonLd.tsx` | Organization schema with FinSpark and Sparkgreen brands | Server | Root layout |
 
 ### Homepage Components
 
@@ -126,7 +173,28 @@ sparkcraft/
 | WhoWeServe | `src/components/WhoWeServe.tsx` | Six audience cards (horizontal scroll on mobile) | `data.ts` → `whoWeServeItems` | None |
 | Industries | `src/components/Industries.tsx` | Ten industry sector pills | `data.ts` → `industries` | None |
 | BIReports | `src/components/BIReports.tsx` | BI report promo panel | `data.ts` → `reportItems` | None |
+| Portfolio | `src/components/Portfolio.tsx` | Ventures section linking to FinSpark and Sparkgreen | `data.ts` → `ventures` | None |
 | CTA | `src/components/CTA.tsx` | Contact section | Hardcoded email/phone | None |
+
+### FinSpark Components
+
+All FinSpark components are server components except `FinSparkHero` (mount animation) and the shared `Reveal`/`SectionHeader` primitives.
+
+| Component | Location | Responsibility |
+|-----------|----------|----------------|
+| FinSparkContent | `src/components/finspark/FinSparkContent.tsx` | Applies `.finspark-theme` and composes the page |
+| FinSparkSection | `src/components/finspark/FinSparkSection.tsx` | Shared section shell (`tone`, `grid`) + `FinSparkHeading` |
+| FinSparkHero | `src/components/finspark/FinSparkHero.tsx` | H1, endorsement link, both CTAs (client) |
+| SignalMark | `src/components/finspark/SignalMark.tsx` | Decorative hero SVG, `aria-hidden` |
+| EvidenceBand | `src/components/finspark/EvidenceBand.tsx` | Sourced stats with a visible Sources list |
+| ProblemSection | `src/components/finspark/ProblemSection.tsx` | Problem argument and pull quote |
+| OperatingModel | `src/components/finspark/OperatingModel.tsx` | Not-a-lender statement + three principles |
+| ProductGrid | `src/components/finspark/ProductGrid.tsx` | Four product modules |
+| LegibilityLoop | `src/components/finspark/LegibilityLoop.tsx` | Four-stage diagram; CSS-only pulse; `sr-only` text equivalent |
+| AudienceGrid | `src/components/finspark/AudienceGrid.tsx` | Four partner audiences |
+| WhySparkcraft | `src/components/finspark/WhySparkcraft.tsx` | Parent-company rationale |
+| FinSparkCTA | `src/components/finspark/FinSparkCTA.tsx` | Partnership mailto + contact channels |
+| FinSparkFooter | `src/components/finspark/FinSparkFooter.tsx` | Route-specific footer and portfolio sign-off |
 
 ### Sparkgreen Components
 
@@ -141,7 +209,11 @@ sparkcraft/
 
 | File | Exports |
 |------|---------|
-| `src/lib/data.ts` | `navLinks`, `tickerItems`, `aboutParagraphs`, `services`, `expertiseItems`, `whoWeServeItems`, `industries`, `reportItems` |
+| `src/lib/data.ts` | `navLinks`, `ventures`, `tickerItems`, `aboutParagraphs`, `services`, `expertiseItems`, `whoWeServeItems`, `industries`, `reportItems` |
+| `src/lib/finspark-data.ts` | `FINSPARK_CONTACT`, `evidenceStats`, `evidenceNote`, `problemPoints`, `problemPullQuote`, `operatingModelStatement`, `operatingPrinciples`, `products`, `loopSteps`, `loopOutcome`, `loopStrapline`, `loopTextEquivalent`, `audiences`, `whySparkcraft`, `ctaHeadline`, `ctaBody` |
+| `src/lib/seo.ts` | `SITE_URL`, `SITE_NAME`, `createPageMetadata()` |
+| `src/lib/motion.ts` | `fadeUp`, `fadeIn`, `stagger()`, `viewport`, `transition` |
+| `src/lib/utils.ts` | `cn()` |
 
 No shared utility functions (`utils/`, `helpers/`) exist.
 
@@ -172,6 +244,26 @@ No shared utility functions (`utils/`, `helpers/`) exist.
 | Background | `#F8F6F1` | `spark-bg` |
 | Dark | `#0D1F17` | `spark-dark` |
 | Text | `#1C1C1C` | `spark-text` |
+
+### FinSpark Brand
+
+Route-scoped. CSS custom properties are declared on `.finspark-theme` in `globals.css`; the same values are exposed as Tailwind `fs-*` classes. Gold and teal-light are used on navy only; teal and ink carry text on the light canvas.
+
+| Token | Hex | Tailwind Class |
+|-------|-----|----------------|
+| Navy | `#0B2545` | `fs-navy` |
+| Navy 2 | `#123A66` | `fs-navy-2` |
+| Navy 3 | `#071A33` | `fs-navy-3` |
+| Gold | `#C8A951` | `fs-gold` |
+| Gold bright | `#DCBE6A` | `fs-gold-bright` |
+| Teal | `#0F6A70` | `fs-teal` |
+| Teal light | `#1FA0A8` | `fs-teal-light` |
+| Ink | `#1B2530` | `fs-ink` |
+| Slate | `#55636F` | `fs-slate` |
+| Canvas | `#F5F7F8` | `fs-canvas` |
+| Line | `#D8DEE3` | `fs-line` |
+
+FinSpark utilities in `globals.css`: `.fs-grid`, `.fs-grid-light`, `.fs-rule`, `.fs-rule-dark`, `.fs-eyebrow`, `.fs-display`, `.fs-heading`, `.fs-signal-track`, `.fs-signal-pulse`.
 
 ### Sparkgreen Brand
 
@@ -214,11 +306,8 @@ No shared utility functions (`utils/`, `helpers/`) exist.
 |---------|----------|---------|
 | Duplicated content (Next.js + legacy HTML) | MEDIUM | Two sources of truth for all page content |
 | Sparkgreen content not in `data.ts` | LOW | 712-line component with inline data arrays |
-| Hero stat mismatch | LOW | Hero says "6 Key Industry Sectors"; Industries lists 10 |
-| Copyright year inconsistency | LOW | Footer: © 2025; Sparkgreen footer: © 2026 |
-| Double footer on `/sparkgreen` | MEDIUM | Sparkgreen inline footer + global Sparkcraft Footer |
-| OpenGraph URL wrong domain | HIGH | References `sparkcraftconsulting.com` instead of `sparkcraft.co.tz` |
-| No `public/` directory | MEDIUM | Missing favicon, robots.txt, sitemap, OG images |
+| Legacy files carry the old company name | LOW | Root `index.html`/`sparkgreen.html` still say "Sparkcraft Consulting"; not the active app, left untouched |
+| `package.json` name is `sparkcraft-consulting` | LOW | Private package name only; no user-facing impact |
 
 ---
 

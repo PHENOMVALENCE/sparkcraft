@@ -12,7 +12,7 @@ export default function WhatMakesDifferent() {
         <SectionHeader
           label="Our Expertise"
           title="What Makes Us Different"
-          description="Sparkcraft Consulting is not a generalist firm. We are specialists — in Africa, in extractives, and in the regulatory environments that define commercial success on this continent."
+          description="Sparkcraft Technologies is not a generalist firm. We are specialists — in African markets, in extractives, and in the regulatory environments that define commercial success on this continent. That same specialism is what our ventures are built on."
         />
 
         <div className="mt-14 columns-1 gap-x-12 md:columns-2">

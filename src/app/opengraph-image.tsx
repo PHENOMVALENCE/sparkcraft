@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Sparkcraft Consulting — Africa market intelligence and advisory";
+export const alt = "Sparkcraft Technologies — intelligence and infrastructure for African markets";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -30,7 +30,7 @@ export default function OpenGraphImage() {
             marginBottom: 24,
           }}
         >
-          Sparkcraft Consulting
+          Sparkcraft Technologies
         </div>
         <div
           style={{
@@ -52,7 +52,7 @@ export default function OpenGraphImage() {
             maxWidth: 800,
           }}
         >
-          Market intelligence, advisory, and regulatory navigation across African markets.
+          Market intelligence, advisory and market infrastructure — FinSpark and Sparkgreen.
         </div>
       </div>
     ),

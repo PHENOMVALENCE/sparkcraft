@@ -9,7 +9,7 @@ import { fadeUp, transition } from "@/lib/motion";
 
 const HERO_STATS = [
   { value: "30+", label: "African Markets Covered" },
-  { value: "4", label: "Core Advisory Services" },
+  { value: "2", label: "Operating Ventures" },
   { value: "10", label: "Key Industry Sectors" },
 ] as const;
 
@@ -33,7 +33,7 @@ export default function Hero() {
           >
             <p className="mb-3 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/75 sm:mb-4 sm:text-xs sm:tracking-[0.2em]">
               <span className="h-1.5 w-1.5 rounded-full bg-spark-accent" aria-hidden="true" />
-              Africa Market Intelligence &amp; Advisory
+              Intelligence &amp; Infrastructure for African Markets
             </p>
 
             <h1 className="hero-headline text-white">
@@ -43,8 +43,8 @@ export default function Hero() {
             </h1>
 
             <p className="mt-4 max-w-prose text-sm leading-7 text-zinc-300 sm:mt-5 sm:text-base sm:leading-8 lg:max-w-md xl:text-lg">
-              Sparkcraft Consulting provides business intelligence, market entry strategy,
-              and regulatory navigation for companies entering or expanding across African
+              Sparkcraft Technologies builds the intelligence and infrastructure that help
+              organisations operate, invest and create measurable impact across African
               markets — from Dar es Salaam to the continent.
             </p>
 
