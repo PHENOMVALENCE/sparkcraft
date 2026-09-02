@@ -3,8 +3,30 @@ export const navLinks = [
   { label: "Expertise", href: "/#expertise" },
   { label: "Who We Serve", href: "/#who-we-serve" },
   { label: "Sectors", href: "/#sectors" },
-  { label: "Sparkgreen", href: "/sparkgreen" },
   { label: "Contact", href: "/#contact" },
+] as const;
+
+/**
+ * Operating ventures of Sparkcraft Technologies. Surfaced in the navbar
+ * "Ventures" menu, the homepage portfolio section, and the footer.
+ */
+export const ventures = [
+  {
+    name: "FinSpark",
+    href: "/finspark",
+    tagline: "Last-mile financial infrastructure",
+    problem:
+      "Farmers, traders and cooperatives generate years of reliable economic activity that never reaches a lender in a readable form. FinSpark builds the credit, insurance, transaction and distribution infrastructure that turns that activity into evidence regulated partners can act on.",
+    accent: "#123A66",
+  },
+  {
+    name: "Sparkgreen",
+    href: "/sparkgreen",
+    tagline: "Sustainability and climate solutions",
+    problem:
+      "Organisations in Tanzania are asked to prove their climate performance without the tools to measure it. Sparkgreen helps them measure, reduce, offset and digitally report their carbon footprint with verifiable impact.",
+    accent: "#1E6B3C",
+  },
 ] as const;
 
 export const tickerItems = [
@@ -21,9 +43,10 @@ export const tickerItems = [
 ] as const;
 
 export const aboutParagraphs = [
-  "Sparkcraft Consulting was built on one fundamental truth: Africa is not a risk to be managed — it is an opportunity to be understood. We exist to close the gap between what international investors assume about African markets and what is actually true on the ground.",
+  "Sparkcraft Technologies was built on one fundamental truth: Africa is not a risk to be managed — it is an opportunity to be understood. We exist to close the gap between what international investors assume about African markets and what is actually true on the ground.",
   "Headquartered in Dar es Salaam, Tanzania, we combine deep local networks, political acumen, and sector expertise to help businesses make confident decisions across the continent. Whether you're entering your first African market or scaling an established footprint, we become your intelligence engine and your regulatory guide.",
-  "Our clients include international companies across mining, oil & gas, technology, logistics, and manufacturing — as well as local enterprises seeking structured pathways to sector expansion. In every engagement, we translate complexity into clarity.",
+  "That work does not stop at analysis. Where we find a structural gap that advice alone cannot close, we build the infrastructure to close it — which is how FinSpark, our last-mile financial infrastructure venture, and Sparkgreen, our sustainability arm, came to exist.",
+  "Our clients include international companies across mining, oil & gas, technology, logistics, and manufacturing — as well as local enterprises, lenders and development organisations seeking structured pathways into new markets and new customer segments. In every engagement, we translate complexity into clarity.",
 ] as const;
 
 export const services = [
@@ -84,7 +107,7 @@ export const expertiseItems = [
   {
     title: "Tanzania & East African Markets",
     description:
-      "Deep in-country networks, institutional knowledge of Tanzania's regulatory bodies, and on-the-ground presence that no remote advisory firm can replicate.",
+      "Deep in-country networks, institutional knowledge of Tanzania's regulatory bodies, and on-the-ground presence that no remote firm can replicate.",
   },
   {
     title: "Mining & Extractives Advisory",

@@ -1,6 +1,6 @@
 # SparkCraft Project Status
 
-Last Reviewed: August 11, 2026
+Last Reviewed: September 2, 2026
 
 ---
 
@@ -20,8 +20,19 @@ Last Reviewed: August 11, 2026
 ## Implemented
 
 - [x] Next.js 14 App Router marketing site
-- [x] Homepage with 9 content sections (Hero, Ticker, About, Services, Expertise, Who We Serve, Industries, BI Reports, CTA)
+- [x] Homepage with 10 content sections (Hero, Ticker, About, Services, Expertise, Who We Serve, Ventures portfolio, Industries, BI Reports, CTA)
 - [x] Sparkgreen subsidiary landing page (`/sparkgreen`)
+- [x] FinSpark venture page (`/finspark`) with a route-scoped navy/gold/teal palette
+- [x] Parent company presented as **Sparkcraft Technologies** across app, metadata and structured data
+- [x] Navbar Ventures dropdown exposing FinSpark and Sparkgreen, dismissible via Escape and outside click
+- [x] Venture-specific footers on `/finspark` and `/sparkgreen`
+- [x] sitemap.xml and robots.txt (`src/app/sitemap.ts`, `src/app/robots.ts`)
+- [x] Dynamic OpenGraph images for all three routes
+- [x] Absolute canonical URLs and per-page metadata via `src/lib/seo.ts`
+- [x] JSON-LD Organization schema with FinSpark and Sparkgreen brands
+- [x] Favicon and Apple touch icon (`src/app/icon.svg`, `src/app/apple-icon.svg`)
+- [x] Skip-to-content link and `#main-content` landmark
+- [x] Scroll-spy active section indication in navigation
 - [x] Responsive design (mobile, tablet, desktop)
 - [x] Framer Motion scroll animations
 - [x] Mobile navigation drawer
@@ -41,8 +52,7 @@ Last Reviewed: August 11, 2026
 
 ## Partially Implemented
 
-- [ ] SEO metadata (basic title/description present; missing sitemap, robots.txt, OG images, canonical URLs, structured data)
-- [ ] Sparkgreen page (functional but has placeholder testimonial, double footer, Sparkcraft-branded nav)
+- [ ] Sparkgreen page (functional; placeholder testimonial still present)
 - [ ] Domain configuration (Vercel domain added but DNS still points to Hostinger)
 - [ ] SSL/HTTPS (Hostinger cert expired; Vercel cert ready but not receiving traffic)
 
@@ -58,24 +68,27 @@ Last Reviewed: August 11, 2026
 
 ### High
 
-- [ ] OpenGraph URLs reference `sparkcraftconsulting.com` instead of `sparkcraft.co.tz`
-- [ ] No sitemap.xml or robots.txt
 - [ ] www subdomain points to Hostinger CDN (`cdn.hstgr.net`)
 
 ### Medium
 
-- [ ] Double footer on `/sparkgreen` page
-- [ ] Legacy HTML/CSS/JS files duplicate Next.js content
-- [ ] No favicon or app icons
-- [ ] No Open Graph images for social sharing
+- [ ] Legacy HTML/CSS/JS files at the repo root duplicate Next.js content
 - [ ] Placeholder testimonial on Sparkgreen page
 
 ### Low
 
-- [ ] Hero stat says "6 sectors" but 10 are listed
-- [ ] Copyright year mismatch (2025 vs 2026)
-- [ ] No skip-to-content link
-- [ ] No active section indication in navigation
+- [ ] Legacy root `index.html` / `sparkgreen.html` still carry the old "Sparkcraft Consulting" name (left untouched — they are not the active application)
+
+---
+
+## Open items requiring human confirmation (FinSpark)
+
+- [ ] **Unpublished statistics.** The FinSpark brief proposed "43.1% of Tanzanians using some form of insurance in 2024" and a "~$100B annual African agricultural financing gap". Neither could be traced to a primary institutional source, so neither is published. The `/finspark` evidence band instead uses four sourced figures from the Bank of Tanzania / National Council for Financial Inclusion *Annual Financial Inclusion Report 2024* and FSDT *FinScope Tanzania 2023*.
+- [ ] **Data-protection language.** `/finspark` states the model is "designed with the requirements of Tanzania's Personal Data Protection Act in mind, and subject to legal review for each engagement." This deliberately stops short of a compliance claim and needs counsel sign-off before it is strengthened.
+- [ ] **Strapline.** The brief's line "Sell the service. Keep the signal." was not used. `/finspark` uses the safer public alternative "Deliver the service. Strengthen the signal." pending stakeholder approval.
+- [ ] **Product status.** `/finspark` states the products are in development and makes no deployment, licensing, regulatory or customer claims. Confirm this remains accurate before launch.
+- [ ] **Contact details.** `/finspark` reuses `contact@sparkcraft.co.tz` and `+255 756 948 267`. Confirm whether FinSpark should have a dedicated inbox.
+- [ ] **Source artifact.** The referenced `FinSpark_OnePager.html` is not present in this repository; the implementation follows `docs/CLAUDE_FINSPARK_IMPLEMENTATION_BRIEF.md` only.
 
 ---
 
@@ -93,10 +106,6 @@ Last Reviewed: August 11, 2026
 
 ## UI/UX Issues
 
-- [ ] Double footer on Sparkgreen page
-- [ ] Sparkcraft navbar on Sparkgreen page (no Sparkgreen-branded nav)
-- [ ] No skip-to-content link
-- [ ] No scroll-spy / active section highlighting
 - [ ] Who We Serve horizontal scroll lacks visual affordance on mobile
 - [ ] Placeholder testimonial on Sparkgreen
 
@@ -104,15 +113,9 @@ Last Reviewed: August 11, 2026
 
 ## SEO Issues
 
-- [ ] HTTPS broken (blocks crawling)
-- [ ] Wrong OpenGraph domain
-- [ ] No sitemap.xml
-- [ ] No robots.txt
-- [ ] No OG images
-- [ ] No JSON-LD structured data
-- [ ] No favicon
-- [ ] No canonical URLs
-- [ ] No metadataBase configured
+- [ ] HTTPS broken at the domain level (blocks crawling — see Infrastructure Issues)
+
+Sitemap, robots.txt, OG images, JSON-LD, favicon, canonical URLs and `metadataBase` are all now implemented.
 
 ---
 
@@ -155,21 +158,15 @@ No critical performance issues. Minor opportunities:
 
 ### Short-term (code)
 
-1. Fix OpenGraph URLs to `sparkcraft.co.tz`
-2. Add `metadataBase` to root layout
-3. Add `app/sitemap.ts` and `public/robots.txt`
-4. Add favicon and OG image
-5. Remove or archive legacy HTML/CSS/JS files
-6. Fix double footer on Sparkgreen
+1. Remove or archive the legacy HTML/CSS/JS files at the repo root
+2. Replace the placeholder testimonial on `/sparkgreen`
+3. Centralize Sparkgreen content in a data module, as `/finspark` does
 
 ### Medium-term
 
-1. Add JSON-LD Organization schema
-2. Add security headers
-3. Add skip-to-content link
-4. Centralize Sparkgreen content in data file
-5. Add scroll-spy navigation
-6. Update dev dependencies
+1. Add security headers
+2. Update dev dependencies (`eslint-config-next` lags `next`)
+3. Complete the legal review of the FinSpark data-protection and insurance wording (see below)
 
 ---
 

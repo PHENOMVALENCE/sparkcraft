@@ -37,6 +37,36 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2026-09-02] — Sparkcraft Technologies rebrand and FinSpark launch page
+
+### Added
+- `/finspark` route: FinSpark venture page with hero, sourced evidence band, problem statement, operating model, four product modules (Score, Tag, Reach, Till), the Legibility Loop diagram, audience grid, parent-company rationale, partnership CTA and a route-specific footer
+- `src/lib/finspark-data.ts` — typed FinSpark content, including per-statistic sources and reporting years
+- `src/components/finspark/` — 13 components, server-rendered except the hero
+- `src/app/finspark/opengraph-image.tsx` — route-specific 1200x630 OG image
+- `src/components/Portfolio.tsx` — homepage Ventures section introducing FinSpark and Sparkgreen (`#ventures`)
+- Navbar Ventures dropdown (Escape / outside-click dismissible) and a FinSpark colour variant
+- Footer Ventures column
+- Route-scoped FinSpark design tokens (`.finspark-theme`) and utilities in `globals.css`; `fs-*` Tailwind colours
+- `WebPage` + `Brand` JSON-LD on `/finspark`; `Brand` entries for FinSpark and Sparkgreen on the Organization schema
+- `/finspark` added to `sitemap.xml`
+
+### Changed
+- Parent company renamed from **Sparkcraft Consulting** to **Sparkcraft Technologies** across metadata, structured data, navbar, footer, homepage copy and OG artwork
+- Positioning reframed from advisory firm to technology and market-infrastructure group
+- Organization JSON-LD type changed from `ProfessionalService` to `Organization`
+- Global `Footer` now returns `null` on `/finspark` as well as `/sparkgreen`
+
+### Notes
+- The proposed statistics "43.1% insurance usage (2024)" and "~$100B African agricultural financing gap" were not verifiable against a primary institutional source and were **not published**. See `docs/PROJECT-STATUS.md` for the full list of items awaiting human and legal confirmation.
+- Legacy root `index.html`, `sparkgreen.html`, `style.css` and `script.js` were intentionally left untouched.
+
+### Validation
+- `npm run lint` — passed, no warnings or errors
+- `npm run build` — passed, 9 static pages generated
+
+---
+
 ## [1.0.0] — Prior to August 2026
 
 ### Existing (pre-audit)

@@ -4,6 +4,7 @@ import BIReports from "@/components/BIReports";
 import CTA from "@/components/CTA";
 import Hero from "@/components/Hero";
 import Industries from "@/components/Industries";
+import Portfolio from "@/components/Portfolio";
 import Services from "@/components/Services";
 import TickerStrip from "@/components/TickerStrip";
 import WhatMakesDifferent from "@/components/WhatMakesDifferent";
@@ -11,13 +12,13 @@ import WhoWeServe from "@/components/WhoWeServe";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Sparkcraft Consulting | Africa Market Intelligence & Advisory",
+  title: "Sparkcraft Technologies | Intelligence & Infrastructure for African Markets",
   description:
-    "Sparkcraft Consulting delivers business intelligence, market entry strategy, and regulatory navigation across 30+ African markets. Headquartered in Dar es Salaam, Tanzania.",
+    "Sparkcraft Technologies builds intelligence and infrastructure for African markets — market entry advisory, regulatory navigation, and the ventures FinSpark and Sparkgreen. Dar es Salaam, Tanzania.",
   path: "",
-  ogTitle: "Sparkcraft Consulting | Africa's Markets, Decoded for You",
+  ogTitle: "Sparkcraft Technologies | Africa's Markets, Decoded for You",
   ogDescription:
-    "Market intelligence and advisory for companies entering or expanding across African markets — mining, oil & gas, technology, and more.",
+    "Market intelligence, advisory and market infrastructure for African markets — and the home of FinSpark and Sparkgreen.",
 });
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
       <Services />
       <WhatMakesDifferent />
       <WhoWeServe />
+      <Portfolio />
       <Industries />
       <BIReports />
       <CTA />
