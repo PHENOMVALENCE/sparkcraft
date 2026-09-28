@@ -1,4 +1,11 @@
-const partners = [
+type Partner = {
+  name: string;
+  logo?: string;
+  wordmark?: string;
+  monogram?: string;
+};
+
+const partners: Partner[] = [
   {
     name: "GSM Group",
     logo: "https://cdn.brandfetch.io/idBz5VIvsz/w/1791/h/1848/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1689131148936",
@@ -29,12 +36,12 @@ const partners = [
     name: "Ramani",
     logo: "https://images.squarespace-cdn.com/content/v1/5355ed0ae4b0753f93e22adc/1643198535266-ZFDQP71KAVXDCUQ7VAUN/Ramani%2BLogo.png?format=1500w",
   },
-] as const;
+];
 
-function PartnerLogo({ partner }: { partner: (typeof partners)[number] }) {
+function PartnerLogo({ partner }: { partner: Partner }) {
   return (
     <div className="corporate-partner-card" title={partner.name}>
-      {"logo" in partner && partner.logo ? (
+      {partner.logo ? (
         <img
           src={partner.logo}
           alt={`${partner.name} logo`}
@@ -45,11 +52,11 @@ function PartnerLogo({ partner }: { partner: (typeof partners)[number] }) {
         />
       ) : (
         <span className="corporate-partner-wordmark" aria-label={partner.name}>
-          {"monogram" in partner && partner.monogram ? <span className="corporate-partner-monogram">{partner.monogram}</span> : null}
+          {partner.monogram ? <span className="corporate-partner-monogram">{partner.monogram}</span> : null}
           <span>{partner.wordmark ?? partner.name}</span>
         </span>
       )}
-      {"wordmark" in partner && partner.wordmark && "logo" in partner && partner.logo ? (
+      {partner.wordmark && partner.logo ? (
         <span className="corporate-partner-caption">{partner.wordmark}</span>
       ) : null}
     </div>
