@@ -11,7 +11,7 @@ This responsive pass covers the SparkCraft corporate experience:
 - Services page and sticky service navigation;
 - About page;
 - Portfolio page;
-- Contact page and inquiry form;
+- Contact page and direct contact pathways;
 - Privacy and Terms pages through shared container and typography rules.
 
 FinSpark and SparkGreen retain their route-scoped visual systems and were not restyled by this corporate pass.
@@ -33,8 +33,7 @@ FinSpark and SparkGreen retain their route-scoped visual systems and were not re
 - Page-intro supporting copy uses a top rule on mobile and a left rule on wider screens.
 - Sticky service tabs are horizontally scrollable, snap to items, and hide scrollbars.
 - Mobile navigation uses 44px minimum touch targets and a viewport-safe scroll region.
-- Form controls remain at 16px to prevent iOS focus zoom.
-- Footer, legal links, contact email, and CTAs wrap safely on narrow screens.
+- - Footer, legal links, contact email, and CTAs wrap safely on narrow screens.
 - Partner marquee cards reduce in size on mobile and animation respects reduced-motion preferences.
 - Hover transforms are neutralized on non-hover touch devices.
 
@@ -52,6 +51,6 @@ Review at minimum:
 - mobile menu open/close and internal scrolling;
 - Services sticky tabs and anchor jumps;
 - partner marquee motion and reduced-motion mode;
-- inquiry form input focus on iOS and Android;
+- direct contact and email-action layout on iOS and Android;
 - long text wrapping in footer and contact details;
 - CTA buttons and service cards across tablet breakpoints.
