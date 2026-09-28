@@ -289,3 +289,31 @@ button:focus-visible {
 .corporate-card { border: 1px solid #d9e1e8; border-radius: .75rem; background: white; padding: clamp(1.5rem, 3vw, 2.5rem); box-shadow: 0 12px 38px #071b3009; }
 .corporate-field { width: 100%; border: 1px solid #a8b7c3; border-radius: .35rem; background: white; padding: .8rem 1rem; color: #071b30; }
 .corporate-field:focus-visible { outline: 3px solid #d7aa45; outline-offset: 2px; }
+
+.corporate-nav { transition: box-shadow .25s, background .25s; }
+.corporate-nav-scrolled { box-shadow: 0 12px 30px #071b3033; background: #071b30f5; backdrop-filter: blur(16px); }
+.corporate-nav-link { position: relative; padding-block: .8rem; font-size: .875rem; font-weight: 650; transition: color .2s; }
+.corporate-nav-link:hover, .corporate-nav-link[aria-current="page"] { color: #e8bd5c; }
+.corporate-nav-link::after { position: absolute; bottom: .4rem; left: 0; width: 0; height: 2px; background: #e8bd5c; content: ""; transition: width .22s; }
+.corporate-nav-link:hover::after, .corporate-nav-link[aria-current="page"]::after { width: 100%; }
+.corporate-nav-group { position: relative; }
+.corporate-dropdown { position: absolute; top: 100%; left: -1rem; width: 410px; border-radius: .6rem; background: #fff; color: #071b30; box-shadow: 0 24px 60px #071b3033; opacity: 0; visibility: hidden; transform: translateY(9px); transition: opacity .2s, transform .2s, visibility .2s; }
+.corporate-dropdown-open, .corporate-nav-group:focus-within .corporate-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.corporate-dropdown-item { display: grid; grid-template-columns: 25px 1fr 18px; gap: .7rem; align-items: start; border-radius: .35rem; padding: .8rem; transition: background .2s; }
+.corporate-dropdown-item:hover, .corporate-dropdown-item:focus-visible { background: #edf2f5; }
+.corporate-mobile-nav { max-height: 0; overflow: hidden; visibility: hidden; opacity: 0; transition: max-height .28s ease, opacity .2s, visibility .28s; }
+.corporate-mobile-nav-open { max-height: 80dvh; visibility: visible; opacity: 1; }
+.corporate-hero-photo { position: relative; min-height: 420px; overflow: hidden; }
+.corporate-hero-photo img { object-fit: cover; object-position: 65% center; transition: transform 1.2s ease; }
+.corporate-hero-photo:hover img { transform: scale(1.035); }
+.corporate-image-frame { overflow: hidden; border-radius: .65rem; }
+.corporate-image-frame img { transition: transform .8s ease; }
+.corporate-image-frame:hover img { transform: scale(1.035); }
+.corporate-service-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.corporate-service-card:hover { transform: translateY(-6px); border-color: #d7aa45; box-shadow: 0 24px 50px #071b301c; }
+.reveal-ready [data-reveal]:not(.is-visible) { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+.reveal-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .corporate-hero-photo img, .corporate-image-frame img, .corporate-service-card { transition: none; }
+}

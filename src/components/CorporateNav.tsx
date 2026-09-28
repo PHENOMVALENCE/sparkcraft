@@ -2,21 +2,52 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { divisions } from "@/lib/solutions";
 
-const links = [{ href: "/", label: "Home" }, { href: "/about", label: "About Us" }, { href: "/services", label: "Services" }, { href: "/portfolio", label: "Portfolio & Partners" }, { href: "/contact", label: "Contact" }];
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/portfolio", label: "Portfolio & Partners" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function CorporateNav() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const path = usePathname();
-  return <header className="corporate-nav">
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => { setOpen(false); setServicesOpen(false); }, [path]);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setOpen(false); setServicesOpen(false); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return <header className={`corporate-nav ${scrolled ? "corporate-nav-scrolled" : ""}`}>
     <nav className="container-wide flex items-center justify-between gap-5 py-4" aria-label="Main navigation">
-      <Link href="/" className="shrink-0 leading-tight" onClick={() => setOpen(false)} aria-label="SparkCraft Technologies home"><span className="block text-xl font-black tracking-tight">SPARKCRAFT</span><span className="block text-xs font-bold uppercase tracking-[.22em] text-spark-accent">TECHNOLOGIES</span></Link>
-      <div className="hidden items-center gap-6 lg:flex">{links.map(link => <Link key={link.href} href={link.href} aria-current={path === link.href ? "page" : undefined} className="text-sm font-semibold hover:text-spark-accent">{link.label}</Link>)}<Link href="/contact" className="corporate-button">Request a Quote</Link></div>
+      <Link href="/" className="shrink-0 leading-tight" onClick={() => setOpen(false)} aria-label="SparkCraft Technologies home"><span className="block text-xl font-black tracking-tight">SPARKCRAFT</span><span className="block text-xs font-bold uppercase tracking-[.22em] text-[#e8bd5c]">TECHNOLOGIES</span></Link>
+      <div className="hidden items-center gap-6 lg:flex">
+        {links.slice(0, 2).map(link => <Link key={link.href} href={link.href} aria-current={path === link.href ? "page" : undefined} className="corporate-nav-link">{link.label}</Link>)}
+        <div className="corporate-nav-group" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+          <div className="flex items-center gap-1"><Link href="/services" aria-current={path === "/services" ? "page" : undefined} className="corporate-nav-link">Services</Link><button type="button" aria-label="Show services" aria-expanded={servicesOpen} aria-controls="corporate-services-menu" onClick={() => setServicesOpen(!servicesOpen)} className="rounded p-1 hover:bg-white/10"><ChevronDown size={16} className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`}/></button></div>
+          <div id="corporate-services-menu" className={`corporate-dropdown ${servicesOpen ? "corporate-dropdown-open" : ""}`} aria-hidden={!servicesOpen}><div className="p-3"><p className="px-3 pb-2 text-xs font-bold uppercase tracking-widest text-[#a47114]">Our solutions</p>{divisions.map(item => <Link key={item.id} href={`/services#${item.id}`} onClick={() => setServicesOpen(false)} tabIndex={servicesOpen ? 0 : -1} className="corporate-dropdown-item"><span className="text-xs font-bold text-[#a47114]">{item.number}</span><span><strong className="block text-sm text-[#071b30]">{item.name}</strong><small className="mt-1 block leading-5 text-[#526273]">{item.short}</small></span><ArrowUpRight size={17} className="shrink-0"/></Link>)}</div></div>
+        </div>
+        {links.slice(2).map(link => <Link key={link.href} href={link.href} aria-current={path === link.href ? "page" : undefined} className="corporate-nav-link">{link.label}</Link>)}
+        <Link href="/contact" className="corporate-button">Request a Quote <ArrowUpRight size={16}/></Link>
+      </div>
       <button type="button" className="rounded-lg border border-white/40 p-2 lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-controls="corporate-mobile-nav" aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
     </nav>
-    {open && <nav id="corporate-mobile-nav" className="container-wide max-h-[75dvh] overflow-auto border-t border-white/20 pb-5 lg:hidden" aria-label="Mobile navigation">{links.map(link => <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="block border-b border-white/15 py-3">{link.label}</Link>)}<div className="py-2 text-xs uppercase tracking-widest text-spark-accent">Our services</div>{divisions.map(item => <Link key={item.id} href={`/services#${item.id}`} onClick={() => setOpen(false)} className="block py-2 pl-3">{item.name}</Link>)}<Link href="/contact" onClick={() => setOpen(false)} className="corporate-button mt-4">Request a Quote</Link></nav>}
+    <nav id="corporate-mobile-nav" className={`corporate-mobile-nav lg:hidden ${open ? "corporate-mobile-nav-open" : ""}`} aria-label="Mobile navigation" aria-hidden={!open}><div className="container-wide max-h-[75dvh] overflow-auto border-t border-white/20 pb-5">{links.slice(0,2).map(link => <Link key={link.href} href={link.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="block border-b border-white/15 py-3">{link.label}</Link>)}<Link href="/services" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="block border-b border-white/15 py-3">Services</Link>{divisions.map(item => <Link key={item.id} href={`/services#${item.id}`} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="block py-2 pl-3 text-sm text-white/75">{item.name}</Link>)}{links.slice(2).map(link => <Link key={link.href} href={link.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="block border-b border-white/15 py-3">{link.label}</Link>)}<Link href="/contact" tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="corporate-button mt-5 w-full">Request a Quote <ArrowUpRight size={16}/></Link></div></nav>
   </header>;
 }
