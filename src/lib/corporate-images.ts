@@ -5,8 +5,8 @@ export const corporateImages = {
   },
   services: {
     ict: {
-      src: "https://images.pexels.com/photos/6804586/pexels-photo-6804586.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      alt: "IT specialist connecting network cables in a server room",
+      src: "https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1800",
+      alt: "IT professional configuring enterprise network cables and server infrastructure",
     },
     fintech: {
       src: "https://images.pexels.com/photos/8475155/pexels-photo-8475155.jpeg?auto=compress&cs=tinysrgb&w=1800",
