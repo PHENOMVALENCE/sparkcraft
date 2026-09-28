@@ -33,3 +33,13 @@ Run `npm ci`, `npx tsc --noEmit`, and `npm run build`. CI runs on PR open, synch
 The homepage uses a split warm-amber hero and original illustrative office imagery inspired by the supplied layout screenshot. These generated photographs depict fictional professionals; they are not SparkCraft staff, clients, or evidence of a completed engagement. The page then alternates editorial image-and-copy, service cards, a capability grid, sector grid, process steps, and an inquiry banner. The reference informed section rhythm and navigation clarity; SparkCraft's copy, components, and imagery are original.
 
 The corporate header stays visible while scrolling, adds a desktop service menu with keyboard-operable toggle and Escape dismissal, and collapses to a mobile menu. Cards use small hover lifts; sections reveal when they enter the viewport. Reduced-motion preferences disable the movement, and content remains visible if JavaScript is unavailable. Recheck menu focus order and image crops on target devices during PR review.
+
+## Corporate design system
+
+The parent website uses a route-scoped palette in `.corporate-site` within `src/app/globals.css`: deep navy (`--sc-navy`), warm amber and gold (`--sc-amber`, `--sc-gold`), cool white and pale gray surfaces, and consistent muted and link colors. Shared classes define page heroes, typography, cards, fields, buttons, focus states, and section rhythm. The corporate footer, navigation, contact form, and all corporate routes consume those tokens. The favicon and Open Graph image use the same navy and gold identity. FinSpark and Sparkgreen retain their separate visual systems.
+
+For future pages, use these semantic variables and shared classes instead of new hard-coded colors. Check text contrast in each context; gold labels on dark navy use `--sc-gold-light`, while text on light surfaces uses `--sc-accent-ink`. Keep body copy at or above 16px and preserve reduced-motion behavior.
+
+## Complete corporate page system
+
+The shared `CorporatePageIntro` gives About, Services, Portfolio, and Contact a consistent title, concise purpose, and optional next step. `CorporateCTA` closes informational pages with a direct inquiry. About explains identity, mission, values, and delivery commitment. Services offers a sticky section selector, detailed capabilities, and a relevant quote action for each division. Portfolio describes solution areas without implying verified case studies. Contact pairs direct channels with the service-specific inquiry form. This gives visitors a clear path from context to capability to contact across the whole site.
