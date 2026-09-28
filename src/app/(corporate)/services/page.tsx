@@ -1,0 +1,15 @@
+import Link from "next/link";
+import { divisions, sectors } from "@/lib/solutions";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({ title: "ICT, Fintech & General Supplies | SparkCraft Technologies", description: "Explore SparkCraft's ICT solutions, enterprise hardware, payment integration, IT support, and general procurement in Tanzania.", path: "/services" });
+
+export default function ServicesPage() {
+  return <main id="main-content"><section className="bg-[#071b30] py-20 text-white"><div className="container-wide"><p className="corporate-kicker !text-[#e8bd5c]">Our services</p><h1 className="corporate-title mt-4">Technology and Business Solutions, Designed Around You.</h1><p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">We help organizations access, deploy, and maintain the technology and operational resources they need to perform. Explore our three core divisions below.</p></div></section>
+    <div className="container-wide flex flex-wrap gap-3 py-6" aria-label="Service sections">{divisions.map(item => <a key={item.id} href={`#${item.id}`} className="corporate-button-outline text-[#071b30] hover:bg-[#edf2f5]">{item.name}</a>)}</div>
+    {divisions.map((item, i) => <section id={item.id} key={item.id} className={`corporate-section scroll-mt-20 ${i % 2 === 0 ? "bg-white" : "bg-[#edf2f5]"}`}><div className="container-wide"><p className="corporate-kicker">Service {item.number} / Flagship</p><h2 className="corporate-title mt-4">{item.name}</h2><p className="mt-3 text-2xl font-semibold text-[#1c5b78]">{item.headline}</p><p className="corporate-copy mt-6 max-w-3xl">{item.description}</p><div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">{item.offerings.map(([title, copy]) => <article key={title} className="corporate-card"><h3 className="text-xl font-bold">{title}</h3><p className="corporate-copy mt-3">{copy}</p></article>)}</div>
+      {item.id === "ict" && <div className="mt-12"><h3 className="text-2xl font-bold">Solutions across industries</h3><div className="mt-5 grid gap-4 md:grid-cols-2">{sectors.slice(0,5).map(([title, copy]) => <div className="border-l-4 border-[#d7aa45] pl-5" key={title}><h4 className="font-bold">{title}</h4><p className="mt-1 text-[#445363]">{copy}</p></div>)}</div></div>}
+      {item.id === "fintech" && <p className="mt-9 max-w-4xl border-l-4 border-[#d7aa45] pl-5 text-sm leading-7 text-[#445363]">Payment processing, aggregation, settlement, and handling of customer funds are subject to applicable Tanzanian requirements and relevant provider authorizations. SparkCraft’s role is defined by each agreed technical scope; integration itself does not constitute a payment service licence.</p>}
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-6 border-t border-[#d9e1e8] pt-8"><p className="max-w-2xl text-[#445363]">{item.prompt}</p><Link href={`/contact?service=${item.id}`} className="corporate-button">{item.cta}</Link></div></div></section>)}
+  </main>;
+}
