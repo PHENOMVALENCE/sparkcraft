@@ -1,32 +1,32 @@
 export const corporateImages = {
   about: {
-    src: "https://images.pexels.com/photos/442152/pexels-photo-442152.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "IT engineer working with enterprise network equipment in a server room",
+    src: "/images/sparkcraft-about.webp",
+    alt: "SparkCraft professionals collaborating around business technology requirements",
   },
   services: {
     ict: {
-      src: "https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      alt: "IT professional configuring enterprise network cables and server infrastructure",
+      src: "/images/ict.jpeg",
+      alt: "ICT professional working with computers and enterprise technology systems",
     },
     fintech: {
-      src: "https://images.pexels.com/photos/8475155/pexels-photo-8475155.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      alt: "Customer making a contactless card payment at a point-of-sale terminal",
+      src: "/images/payments.jpeg",
+      alt: "Customer completing a digital payment using a point-of-sale terminal",
     },
     supplies: {
-      src: "https://images.pexels.com/photos/9574509/pexels-photo-9574509.jpeg?auto=compress&cs=tinysrgb&w=1800",
-      alt: "Office workstation with computer and printer equipment",
+      src: "/images/cp.jpeg",
+      alt: "Technology equipment arranged for institutional and enterprise deployment",
     },
   },
   education: {
-    src: "https://images.pexels.com/photos/10638082/pexels-photo-10638082.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "Students learning with computers in a classroom",
+    src: "/images/cp.jpeg",
+    alt: "Computer and digital equipment prepared for learning and institutional use",
   },
   corporate: {
-    src: "https://images.pexels.com/photos/12903173/pexels-photo-12903173.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "Business team working with computers in a modern office",
+    src: "/images/sparkcraft-hero.webp",
+    alt: "Professionals collaborating in a modern business environment",
   },
   payments: {
-    src: "https://images.pexels.com/photos/5239803/pexels-photo-5239803.jpeg?auto=compress&cs=tinysrgb&w=1800",
-    alt: "Close-up of a contactless card payment at a POS terminal",
+    src: "/images/payments.jpeg",
+    alt: "Digital payment terminal processing a customer transaction",
   },
 } as const;
