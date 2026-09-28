@@ -55,3 +55,6 @@
 - Added larger, consistently framed partner slides with monochrome-to-color logo treatment on hover.
 - Slowed and refined the continuous carousel motion, including pause-on-hover/focus and reduced-motion fallback.
 - Added responsive sizing, branded metadata, and improved visual depth across mobile, tablet, and desktop.
+## 2026-09-28 — GSM Group logo
+
+- Replaced the external GSM Group image in the partner carousel with the supplied local logo asset.
