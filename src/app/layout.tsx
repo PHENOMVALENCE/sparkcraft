@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import VentureChrome from "@/components/VentureChrome";
+
 import JsonLd from "@/components/JsonLd";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "./globals.css";
@@ -15,15 +15,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} | Intelligence & Infrastructure for African Markets`,
+    default: `${SITE_NAME} | Technology. Payments. Business Infrastructure.`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Sparkcraft Technologies builds intelligence and infrastructure that help organisations operate, invest and create measurable impact across African markets. Home of FinSpark and Sparkgreen. Headquartered in Dar es Salaam, Tanzania.",
+    "SparkCraft Technologies delivers ICT solutions, fintech integration, and enterprise procurement services in Tanzania.",
   keywords: [
-    "Africa market entry",
+    "ICT solutions Tanzania",
     "Tanzania technology company",
-    "market intelligence Africa",
+    "fintech integration Tanzania",
     "last-mile financial infrastructure",
     "FinSpark",
     "Sparkgreen",
@@ -58,9 +58,9 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>
-        <Navbar />
+        <VentureChrome />
         {children}
-        <Footer />
+
       </body>
     </html>
   );

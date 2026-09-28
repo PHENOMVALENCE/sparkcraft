@@ -276,3 +276,16 @@ button:focus-visible {
     transform: none;
   }
 }
+
+/* Parent company pages: deep blue infrastructure palette with precise gold accents. */
+.corporate-nav { position: sticky; top: 0; z-index: 50; color: white; background: #071b30; box-shadow: 0 8px 30px #071b301c; }
+.corporate-button { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; border-radius: .35rem; background: #d7aa45; padding: .85rem 1.25rem; color: #071b30; font-size: .875rem; font-weight: 800; transition: background .2s, transform .2s; }
+.corporate-button:hover { background: #f0ca70; transform: translateY(-2px); }
+.corporate-button-outline { display: inline-flex; align-items: center; justify-content: center; border: 1px solid currentColor; border-radius: .35rem; padding: .85rem 1.25rem; font-size: .875rem; font-weight: 700; }
+.corporate-section { padding-block: clamp(4rem, 8vw, 7rem); }
+.corporate-kicker { color: #a47114; font-size: .8rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.corporate-title { max-width: 850px; font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 800; line-height: 1.12; letter-spacing: -.045em; }
+.corporate-copy { color: #445363; font-size: 1.0625rem; line-height: 1.8; }
+.corporate-card { border: 1px solid #d9e1e8; border-radius: .75rem; background: white; padding: clamp(1.5rem, 3vw, 2.5rem); box-shadow: 0 12px 38px #071b3009; }
+.corporate-field { width: 100%; border: 1px solid #a8b7c3; border-radius: .35rem; background: white; padding: .8rem 1rem; color: #071b30; }
+.corporate-field:focus-visible { outline: 3px solid #d7aa45; outline-offset: 2px; }
