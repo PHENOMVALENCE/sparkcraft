@@ -25,3 +25,9 @@
 - Switched the flagship ICT, fintech, and general supplies visuals to the local assets in `public/images`.
 - Reused the approved local imagery for corporate, payments, and education-related visual sections where appropriate.
 - Removed the Pexels remote image dependency from the Next.js image configuration.
+
+## 2026-09-28 — Partner showcase
+
+- Added an animated partner-logo marquee to the corporate homepage.
+- Included GSM Group, ICEA LION, Simplify VFD, Azania Bank, flySunBird, I&M Bank, and Ramani.
+- Added hover-to-pause behavior and a reduced-motion fallback for accessibility.
