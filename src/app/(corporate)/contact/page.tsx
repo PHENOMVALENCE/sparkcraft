@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ArrowUpRight, CreditCard, Mail, MapPin, Network, PackageCheck, Phone } from "lucide-react";
 import CorporatePageIntro from "@/components/CorporatePageIntro";
 import { createPageMetadata } from "@/lib/seo";
@@ -149,12 +148,12 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-            <Link
+            <a
               href="mailto:contact@sparkcraft.co.tz?subject=SparkCraft%20project%20brief"
               className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--sc-gold)] px-5 py-3.5 font-extrabold text-[var(--sc-navy)] transition hover:bg-[var(--sc-gold-light)] sm:w-auto"
             >
               Send Your Requirements <ArrowUpRight size={18} />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
