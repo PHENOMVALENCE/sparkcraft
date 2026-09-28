@@ -8,7 +8,7 @@ type Partner = {
 const partners: Partner[] = [
   {
     name: "GSM Group",
-    logo: "https://cdn.brandfetch.io/idBz5VIvsz/w/1791/h/1848/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1689131148936",
+    logo: "/partners/gsm-group.png",
   },
   {
     name: "ICEA LION",
