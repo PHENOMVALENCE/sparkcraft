@@ -15,3 +15,7 @@
 - Added photography to homepage service cards, sector highlights, service detail sections, About, and Portfolio.
 - Enabled optimized remote images from `images.pexels.com` through the Next.js image configuration.
 - Added visual treatments for image cards, service photography, and sector overlays while preserving reduced-motion behavior.
+
+## 2026-09-28 — ICT service image refinement
+
+- Replaced the ICT & Technology Solutions card image with a wider enterprise networking scene showing hands-on server and cabling work.
