@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CorporateCTA from "@/components/CorporateCTA";
+import PartnersMarquee from "@/components/PartnersMarquee";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Building2, CreditCard, GraduationCap, HeartPulse, Network, PackageCheck, Truck, Users } from "lucide-react";
 import { createPageMetadata } from "@/lib/seo";
@@ -43,6 +44,8 @@ export default function Home() {
     </section>
 
     <section className="corporate-section bg-[var(--sc-surface)]"><div className="container-wide"><div className="mx-auto max-w-3xl text-center" data-reveal><p className="corporate-kicker">What we do</p><h2 className="corporate-title mx-auto mt-4">Three Divisions. One Dependable Partner.</h2><p className="corporate-copy mt-5">From infrastructure to payment connectivity and essential supplies, our services are built around what your organization needs.</p></div><div className="mt-12 grid gap-5 md:grid-cols-3">{divisions.map((item, i) => { const Icon = serviceIcons[i]; const visual = corporateImages.services[item.id]; return <article data-reveal className="corporate-card corporate-service-card overflow-hidden !p-0" key={item.id}><div className="corporate-card-image relative"><Image src={visual.src} alt={visual.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover"/></div><div className="flex h-full flex-col p-7"><div className="flex items-start justify-between"><span className="grid h-14 w-14 place-items-center rounded-full bg-[var(--sc-amber)] text-[var(--sc-navy)]"><Icon size={27} strokeWidth={1.7}/></span><span className="text-xs font-bold tracking-widest text-[var(--sc-accent-ink)]">{item.number} / FLAGSHIP</span></div><h3 className="mt-7 text-2xl font-bold text-[var(--sc-navy)]">{item.name}</h3><p className="corporate-copy mt-4 flex-1">{item.short}</p><Link className="mt-8 inline-flex items-center gap-2 font-bold text-[var(--sc-link)]" href={`/services#${item.id}`}>Explore solution <ArrowUpRight size={18}/></Link></div></article>; })}</div><div className="mt-10 text-center"><Link href="/services" className="corporate-button !bg-[var(--sc-navy)] !text-white">Explore All Services <ArrowUpRight size={17}/></Link></div></div></section>
+
+    <PartnersMarquee />
 
     <section className="corporate-section container-wide" data-reveal><div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr]"><div><p className="corporate-kicker">The SparkCraft advantage</p><h2 className="corporate-title mt-4">More Than a Supplier. Your Technology Delivery Partner.</h2><p className="corporate-copy mt-6">Successful implementation starts with understanding your needs, sourcing appropriate solutions, and staying accountable through delivery.</p></div><div className="grid gap-px overflow-hidden rounded-lg border border-[var(--sc-border)] bg-[var(--sc-border)] sm:grid-cols-2">{advantages.map(([title, copy], i) => <div className="bg-white p-7" key={title}><span className="text-sm font-bold text-[var(--sc-accent-ink)]">0{i+1}</span><h3 className="mt-4 text-xl font-bold">{title}</h3><p className="corporate-copy mt-3">{copy}</p></div>)}</div></div></section>
 

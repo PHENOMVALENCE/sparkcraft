@@ -367,3 +367,94 @@ button:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .corporate-card-image img, .corporate-photo-panel img { transition: none; }
 }
+
+@keyframes corporate-partner-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.corporate-partners-section {
+  overflow: hidden;
+  border-block: 1px solid var(--sc-border);
+  background: linear-gradient(180deg, #fff 0%, var(--sc-surface) 100%);
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+}
+.corporate-partner-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.corporate-partner-track {
+  display: flex;
+  width: max-content;
+  animation: corporate-partner-scroll 34s linear infinite;
+  will-change: transform;
+}
+.corporate-partner-marquee:hover .corporate-partner-track,
+.corporate-partner-marquee:focus-within .corporate-partner-track {
+  animation-play-state: paused;
+}
+.corporate-partner-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 1rem;
+}
+.corporate-partner-card {
+  display: flex;
+  min-width: 190px;
+  height: 108px;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  border: 1px solid var(--sc-border);
+  border-radius: .75rem;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(8, 29, 48, .045);
+}
+.corporate-partner-logo {
+  display: block;
+  max-width: 145px;
+  max-height: 62px;
+  object-fit: contain;
+}
+.corporate-partner-caption {
+  max-width: 90px;
+  color: var(--sc-navy);
+  font-size: .85rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.corporate-partner-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  color: var(--sc-navy);
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+.corporate-partner-monogram {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: .45rem;
+  background: #38aee4;
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: -.04em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .corporate-partner-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .corporate-partner-track {
+    animation: none;
+  }
+  .corporate-partner-group[aria-hidden="true"] {
+    display: none;
+  }
+}
