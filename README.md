@@ -16,7 +16,7 @@ Use Node.js 20 and npm. Run `npm ci`, then `npm run dev` and visit `http://local
 
 - `src/app/(corporate)/`: corporate routes and shared corporate layout
 - `src/app/finspark/`, `src/app/sparkgreen/`: existing venture routes
-- `src/components/CorporateNav.tsx`, `CorporateFooter.tsx`, `InquiryForm.tsx`: corporate UI
+- `src/components/CorporateNav.tsx`, `CorporateFooter.tsx`, `CorporatePageIntro.tsx`: corporate UI
 - `src/lib/solutions.ts`: service and sector content
 - `src/lib/seo.ts`, `src/app/sitemap.ts`, `src/components/JsonLd.tsx`: metadata and structured data
 - `docs/REBRAND.md`: editorial decisions, verification checklist, and limitations
