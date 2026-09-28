@@ -40,3 +40,11 @@
 - Made primary actions full-width on mobile where appropriate and preserved compact desktop layouts.
 - Improved mobile navigation height, touch target sizing, horizontal service navigation, footer wrapping, long email handling, and iOS form-field sizing.
 - Added reduced-motion and touch-device behavior refinements for animated and hover-driven UI.
+
+## 2026-09-28 — Contact page redesign
+
+- Removed the contact inquiry form and its client-side mailto preparation flow.
+- Rebuilt Contact around direct email, telephone, and location details.
+- Added dedicated ICT, fintech, and procurement enquiry pathways with pre-addressed email subjects.
+- Added a project-brief checklist to help clients send complete requirements without filling in a web form.
+- Updated Privacy, Terms, README architecture notes, and removed the obsolete InquiryForm component.
