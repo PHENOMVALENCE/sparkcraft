@@ -19,3 +19,9 @@
 ## 2026-09-28 — ICT service image refinement
 
 - Replaced the ICT & Technology Solutions card image with a wider enterprise networking scene showing hands-on server and cabling work.
+
+## 2026-09-28 — Local corporate image assets
+
+- Switched the flagship ICT, fintech, and general supplies visuals to the local assets in `public/images`.
+- Reused the approved local imagery for corporate, payments, and education-related visual sections where appropriate.
+- Removed the Pexels remote image dependency from the Next.js image configuration.
