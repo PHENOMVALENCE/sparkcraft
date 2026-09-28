@@ -353,3 +353,17 @@ button:focus-visible {
 .corporate-service-nav { position: sticky; top: 72px; z-index: 30; border-bottom: 1px solid var(--sc-border); background: rgba(255,255,255,.96); backdrop-filter: blur(14px); }
 .corporate-service-nav a { white-space: nowrap; }
 @media (max-width: 1023px) { .corporate-service-nav { top: 72px; } }
+
+.corporate-capability-pill { display: inline-flex; align-items: center; border: 1px solid var(--sc-border); border-radius: 999px; background: var(--sc-surface); padding: .5rem .75rem; color: var(--sc-body); font-size: .78rem; font-weight: 750; }
+.corporate-card-image { min-height: 220px; overflow: hidden; background: var(--sc-surface); }
+.corporate-card-image img { transition: transform .7s ease; }
+.corporate-service-card:hover .corporate-card-image img { transform: scale(1.045); }
+.corporate-photo-panel { overflow: hidden; border-radius: .8rem; background: var(--sc-surface); box-shadow: 0 22px 50px rgba(8, 29, 48, .11); }
+.corporate-photo-panel img { transition: transform .9s ease; }
+.corporate-photo-panel:hover img { transform: scale(1.025); }
+.corporate-sector-photo { overflow: hidden; border-radius: .65rem; background: var(--sc-navy-soft); }
+.corporate-sector-photo::after { position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,29,48,.88), rgba(8,29,48,.06) 68%); content: ""; }
+.corporate-sector-photo figcaption { position: absolute; z-index: 1; right: 1.25rem; bottom: 1.1rem; left: 1.25rem; color: white; font-size: 1.05rem; font-weight: 800; }
+@media (prefers-reduced-motion: reduce) {
+  .corporate-card-image img, .corporate-photo-panel img { transition: none; }
+}

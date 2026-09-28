@@ -8,3 +8,10 @@
 - Refined the corporate homepage with a photo-led split hero, editorial sections, accessible service navigation, and motion-aware interactions.
 - Unified the corporate palette, typography, controls, page headers, favicon, and social image under shared design tokens.
 - Reworked About, Services, Portfolio, and Contact around consistent page introductions, service navigation, editorial layouts, and inquiry calls to action.
+
+## 2026-09-28 — Corporate imagery revision
+
+- Added a reusable corporate image catalogue for ICT, fintech, procurement, education, and enterprise contexts.
+- Added photography to homepage service cards, sector highlights, service detail sections, About, and Portfolio.
+- Enabled optimized remote images from `images.pexels.com` through the Next.js image configuration.
+- Added visual treatments for image cards, service photography, and sector overlays while preserving reduced-motion behavior.
