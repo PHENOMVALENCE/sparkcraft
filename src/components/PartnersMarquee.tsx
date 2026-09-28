@@ -40,25 +40,25 @@ const partners: Partner[] = [
 
 function PartnerLogo({ partner }: { partner: Partner }) {
   return (
-    <div className="corporate-partner-card" title={partner.name}>
-      {partner.logo ? (
-        <img
-          src={partner.logo}
-          alt={`${partner.name} logo`}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          className="corporate-partner-logo"
-        />
-      ) : (
-        <span className="corporate-partner-wordmark" aria-label={partner.name}>
-          {partner.monogram ? <span className="corporate-partner-monogram">{partner.monogram}</span> : null}
-          <span>{partner.wordmark ?? partner.name}</span>
-        </span>
-      )}
-      {partner.wordmark && partner.logo ? (
-        <span className="corporate-partner-caption">{partner.wordmark}</span>
-      ) : null}
+    <div className="corporate-partner-slide" title={partner.name}>
+      <div className="corporate-partner-logo-wrap">
+        {partner.logo ? (
+          <img
+            src={partner.logo}
+            alt={`${partner.name} logo`}
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            className="corporate-partner-logo"
+          />
+        ) : (
+          <span className="corporate-partner-wordmark" aria-label={partner.name}>
+            {partner.monogram ? <span className="corporate-partner-monogram">{partner.monogram}</span> : null}
+            <span>{partner.wordmark ?? partner.name}</span>
+          </span>
+        )}
+      </div>
+      <span className="corporate-partner-name">{partner.name}</span>
     </div>
   );
 }
@@ -67,23 +67,35 @@ export default function PartnersMarquee() {
   return (
     <section className="corporate-partners-section" aria-labelledby="partners-heading">
       <div className="container-wide">
-        <div className="mx-auto max-w-3xl text-center" data-reveal>
-          <p className="corporate-kicker">Our partners</p>
-          <h2 id="partners-heading" className="corporate-title mx-auto mt-4">Trusted Relationships. Shared Momentum.</h2>
-          <p className="corporate-copy mt-5">
-            We work across a growing network of organizations in financial services, technology, enterprise, and mobility.
+        <div className="corporate-partners-heading" data-reveal>
+          <div>
+            <p className="corporate-kicker corporate-kicker-light">Partners & ecosystem</p>
+            <h2 id="partners-heading" className="mt-4 max-w-3xl text-3xl font-extrabold tracking-[-.035em] text-white sm:text-4xl lg:text-5xl">
+              Strong relationships. Better delivery.
+            </h2>
+          </div>
+          <p className="max-w-xl text-base leading-7 text-white/70 sm:text-lg sm:leading-8">
+            SparkCraft works across a growing network of organizations in financial services, technology, enterprise, and mobility.
           </p>
         </div>
       </div>
 
-      <div className="corporate-partner-marquee mt-10" aria-label="Partner logos">
+      <div className="corporate-partner-carousel mt-10 sm:mt-12" aria-label="SparkCraft partner logos">
         <div className="corporate-partner-track">
-          <div className="corporate-partner-group">
-            {partners.map((partner) => <PartnerLogo key={partner.name} partner={partner} />)}
-          </div>
-          <div className="corporate-partner-group" aria-hidden="true">
-            {partners.map((partner) => <PartnerLogo key={`duplicate-${partner.name}`} partner={partner} />)}
-          </div>
+          {[0, 1].map((groupIndex) => (
+            <div className="corporate-partner-group" aria-hidden={groupIndex === 1 ? "true" : undefined} key={groupIndex}>
+              {partners.map((partner) => (
+                <PartnerLogo key={`${groupIndex}-${partner.name}`} partner={partner} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="container-wide mt-8">
+        <div className="corporate-partner-meta">
+          <span>Selected organizations across our business network</span>
+          <span className="corporate-partner-status"><span aria-hidden="true" /> Continuous carousel</span>
         </div>
       </div>
     </section>

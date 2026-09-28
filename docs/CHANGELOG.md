@@ -48,3 +48,10 @@
 - Added dedicated ICT, fintech, and procurement enquiry pathways with pre-addressed email subjects.
 - Added a project-brief checklist to help clients send complete requirements without filling in a web form.
 - Updated Privacy, Terms, README architecture notes, and removed the obsolete InquiryForm component.
+
+## 2026-09-28 — Premium partner carousel
+
+- Reworked the partner section into a premium dark enterprise band with stronger visual hierarchy.
+- Added larger, consistently framed partner slides with monochrome-to-color logo treatment on hover.
+- Slowed and refined the continuous carousel motion, including pause-on-hover/focus and reduced-motion fallback.
+- Added responsive sizing, branded metadata, and improved visual depth across mobile, tablet, and desktop.
