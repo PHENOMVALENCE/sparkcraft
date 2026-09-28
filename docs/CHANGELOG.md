@@ -31,3 +31,12 @@
 - Added an animated partner-logo marquee to the corporate homepage.
 - Included GSM Group, ICEA LION, Simplify VFD, Azania Bank, flySunBird, I&M Bank, and Ramani.
 - Added hover-to-pause behavior and a reduced-motion fallback for accessibility.
+
+## 2026-09-28 — Responsive site revision
+
+- Reviewed the corporate homepage, navigation, services, about, portfolio, contact, legal pages, partner marquee, forms, footer, and shared CTAs for mobile and tablet behavior.
+- Reduced mobile hero and section sizing, improved image heights, and prevented oversized headings on narrow screens.
+- Improved tablet grid breakpoints so service, portfolio, sector, and process cards do not become cramped.
+- Made primary actions full-width on mobile where appropriate and preserved compact desktop layouts.
+- Improved mobile navigation height, touch target sizing, horizontal service navigation, footer wrapping, long email handling, and iOS form-field sizing.
+- Added reduced-motion and touch-device behavior refinements for animated and hover-driven UI.
