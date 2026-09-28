@@ -1,0 +1,63 @@
+export const divisions = [
+  {
+    id: "ict",
+    number: "01",
+    name: "ICT & Technology Solutions",
+    short: "Enterprise hardware, customized computing devices, networking, software deployment, installation, and IT support.",
+    headline: "Technology that works for your organization.",
+    description: "We supply, configure, install, and maintain hardware and software solutions tailored to the technical and operational needs of businesses, institutions, and field teams.",
+    offerings: [
+      ["Customized tablets & rugged devices", "Tablets and laptops for field teams and demanding environments. IP54, IP65, and IP67 options depend on model specifications and availability."],
+      ["Enterprise computing", "All-in-One computers, business laptops, monitors, accessories, and workstations."],
+      ["Servers & networking", "Servers, routers, switches, wireless access points, and structured networking equipment."],
+      ["POS & payment terminals", "Terminals, barcode scanners, receipt printers, and compatible peripherals."],
+      ["Software configuration", "Configuration and deployment support for education, healthcare, logistics, and other operations."],
+      ["Installation & support", "System testing, troubleshooting, preventive maintenance, and support under agreed arrangements."],
+    ],
+    prompt: "Share your technical specifications, quantities, intended application, and delivery requirements.",
+    cta: "Request an ICT Quote",
+  },
+  {
+    id: "fintech",
+    number: "02",
+    name: "Fintech & Digital Payments",
+    short: "Payment gateway integration, channel connectivity, transaction monitoring, and reconciliation workflows.",
+    headline: "Connecting payments. Simplifying transactions.",
+    description: "We support businesses, fintech providers, and financial institutions with technical integration of supported payment services into existing business systems.",
+    offerings: [
+      ["Payment gateway & API integration", "Connect supported payment services to websites, mobile applications, and enterprise platforms."],
+      ["Payment channel connectivity", "Orchestrate supported channels and providers within agreed partner and regulatory arrangements."],
+      ["Transaction reconciliation", "Match payments against business records, identify discrepancies, and simplify settlement reporting."],
+      ["Reporting & monitoring", "Configurable dashboards, payment status tracking, and operational visibility."],
+      ["Integration support", "Technical scoping, configuration, testing, implementation coordination, and support."],
+    ],
+    prompt: "Tell us about your platform, payment channels, transaction volumes, and integration objectives.",
+    cta: "Discuss a Fintech Project",
+  },
+  {
+    id: "supplies",
+    number: "03",
+    name: "IT & General Supplies",
+    short: "Technology procurement, office equipment, furniture, consumables, and institutional supply solutions.",
+    headline: "Reliable supplies. Simplified procurement.",
+    description: "We coordinate sourcing and delivery based on client specifications, quantities, budgets, and agreed timelines to keep teams and facilities running.",
+    offerings: [
+      ["Office furniture", "Desks, chairs, workstations, cabinets, storage, meeting tables, and partitions."],
+      ["IT equipment & accessories", "Computers, printers, scanners, monitors, cables, and peripherals."],
+      ["Cleaning & catering", "Hygiene materials, sanitation consumables, and workplace essentials."],
+      ["Stationery", "Paper, writing materials, files, printer consumables, and administrative supplies."],
+      ["Packaging & field kits", "Packaging materials, storage products, and operational kits for field teams."],
+    ],
+    prompt: "Send your bill of quantities, product specifications, estimated quantities, and delivery schedule.",
+    cta: "Request a Supplies Quote",
+  },
+] as const;
+
+export const sectors = [
+  ["Banking & Financial Services", "Payment connectivity, reconciliation systems, IT infrastructure, and enterprise equipment."],
+  ["Corporate & Enterprise", "Workplace technology, networking, enterprise computing, and IT procurement."],
+  ["Education", "Digital learning equipment, computer labs, tablets, and software configuration."],
+  ["Healthcare", "Healthcare IT equipment, configurable digital systems, and operational supplies."],
+  ["Logistics & Distribution", "Rugged devices, POS systems, connectivity, and field technology."],
+  ["NGOs & Development Partners", "Field devices, program technology, office supplies, and project procurement."],
+] as const;
