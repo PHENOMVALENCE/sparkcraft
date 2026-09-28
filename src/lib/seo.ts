@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://sparkcraft.co.tz";
-export const SITE_NAME = "Sparkcraft Technologies";
+export const SITE_NAME = "SparkCraft Technologies";
 
 function normalizePath(path: string) {
   if (!path || path === "/") return "";
@@ -15,7 +15,7 @@ function pageUrl(path: string) {
 
 function ogImageUrl(path: string) {
   const normalized = normalizePath(path);
-  return normalized ? `${SITE_URL}${normalized}/opengraph-image` : `${SITE_URL}/opengraph-image`;
+  return normalized === "/finspark" || normalized === "/sparkgreen" ? `${SITE_URL}${normalized}/opengraph-image` : `${SITE_URL}/opengraph-image`;
 }
 
 type PageMetaInput = {
@@ -55,7 +55,7 @@ export function createPageMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: `${SITE_NAME} — intelligence and infrastructure for African markets`,
+          alt: `${SITE_NAME} — ICT, fintech, and enterprise solutions`,
         },
       ],
     },

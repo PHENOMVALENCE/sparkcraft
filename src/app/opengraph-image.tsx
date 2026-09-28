@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Sparkcraft Technologies — intelligence and infrastructure for African markets";
+export const alt = "SparkCraft Technologies — Technology. Payments. Business Infrastructure.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,8 +16,8 @@ export default function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "64px 80px",
-          background: "linear-gradient(135deg, #0D1F17 0%, #1A3C2E 100%)",
-          color: "#F8F6F1",
+          background: "linear-gradient(135deg, #071b30 0%, #174564 100%)",
+          color: "#FFFFFF",
         }}
       >
         <div
@@ -26,11 +26,11 @@ export default function OpenGraphImage() {
             fontWeight: 700,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            color: "#C9982A",
+            color: "#d7aa45",
             marginBottom: 24,
           }}
         >
-          Sparkcraft Technologies
+          SparkCraft Technologies
         </div>
         <div
           style={{
@@ -41,7 +41,7 @@ export default function OpenGraphImage() {
             maxWidth: 900,
           }}
         >
-          Africa&apos;s Markets, Decoded for You.
+          Technology That Moves Your Business Forward.
         </div>
         <div
           style={{
@@ -52,7 +52,7 @@ export default function OpenGraphImage() {
             maxWidth: 800,
           }}
         >
-          Market intelligence, advisory and market infrastructure — FinSpark and Sparkgreen.
+          ICT solutions, digital payments, and enterprise procurement.
         </div>
       </div>
     ),

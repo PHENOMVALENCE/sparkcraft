@@ -7,7 +7,7 @@ const organizationSchema = {
   name: SITE_NAME,
   url: SITE_URL,
   description:
-    "Sparkcraft Technologies builds intelligence and infrastructure that help organisations operate, invest and create measurable impact across African markets.",
+    "SparkCraft Technologies delivers ICT solutions, fintech integration, and enterprise procurement services in Tanzania.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Dar es Salaam",
@@ -15,7 +15,7 @@ const organizationSchema = {
   },
   areaServed: {
     "@type": "Place",
-    name: "Africa",
+    name: "Tanzania",
   },
   email: "contact@sparkcraft.co.tz",
   telephone: "+255756948267",
