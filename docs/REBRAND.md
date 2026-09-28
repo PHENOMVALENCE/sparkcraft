@@ -27,3 +27,9 @@ Corporate pages have route metadata, canonical URLs, a shared Open Graph image, 
 ## Validation and release
 
 Run `npm ci`, `npx tsc --noEmit`, and `npm run build`. CI runs on PR open, synchronize, and reopen. Human review should verify copy and legal pages, confirm portfolio relationships and logos, test the mailto flow on target devices, and approve any production deployment. The repository has no documented deployment credentials.
+
+## Visual interaction revision
+
+The homepage uses a split warm-amber hero and original illustrative office imagery inspired by the supplied layout screenshot. These generated photographs depict fictional professionals; they are not SparkCraft staff, clients, or evidence of a completed engagement. The page then alternates editorial image-and-copy, service cards, a capability grid, sector grid, process steps, and an inquiry banner. The reference informed section rhythm and navigation clarity; SparkCraft's copy, components, and imagery are original.
+
+The corporate header stays visible while scrolling, adds a desktop service menu with keyboard-operable toggle and Escape dismissal, and collapses to a mobile menu. Cards use small hover lifts; sections reveal when they enter the viewport. Reduced-motion preferences disable the movement, and content remains visible if JavaScript is unavailable. Recheck menu focus order and image crops on target devices during PR review.
